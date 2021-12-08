@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">LearningToLive</string>
+    <string name="united_kingdom">United Kingdom</string>
+    <string name="spain">Spain</string>
+    <string name="ireland">Ireland</string>
+    <string name="slovenia">Slovenia</string>
+    <string name="finland">Finland</string>
+    <string name="daily_life">Daily Life</string>
+    <string name="health_button">Health and Well-Being</string>
+    <string name="settling_button">Settling In</string>
+    <string name="migrant_button">Migrant Status</string>
+    <string name="language_button">Language and Study</string>
+    <string name="life_housing">Housing and Accommodation</string>
+    <string name="life_food">Food and Home</string>
+    <string name="life_eating">Eating Out</string>
+    <string name="life_money">Money and Banking</string>
+    <string name="life_family">Family Support and Childcare</string>
+    <string name="life_travel">Travel to Campus</string>
+    <string name="life_hospitals">Hospitals and Pharmacies</string>
+    <string name="life_local">Local Area</string>
+</resources>
