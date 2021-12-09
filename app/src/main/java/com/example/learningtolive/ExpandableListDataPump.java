@@ -6,6 +6,12 @@ import java.util.List;
 
 public class ExpandableListDataPump {
     public static HashMap<String, List<String>> getData() {
+        FirebaseHandler fb = new FirebaseHandler();
+
+        Category testCategory = new Category(Category.Name.DAILYLIFE, "test1") ;
+        fb.setValue("testRef", testCategory);
+        fb.getValue("testRef");
+
         HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
 
         List<String> housing = new ArrayList<String>();

@@ -1,5 +1,7 @@
 package com.example.learningtolive;
 
+import java.util.ArrayList;
+
 public class Category {
 
     enum Name {
@@ -11,6 +13,14 @@ public class Category {
     }
 
     Name name;
+    String subCategories;
 
-    public Category(Name n) { name = n; }
+    public Category(Name n) {
+        name = n;
+    }
+
+    public Category(Name n, String sc) {
+        name = n;
+        subCategories = sc;
+    }
 }

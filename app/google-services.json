@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "762012925182",
+    "project_id": "learningtolive-e4844",
+    "storage_bucket": "learningtolive-e4844.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762012925182:android:4badb74b8146a549b839af",
+        "android_client_info": {
+          "package_name": "com.example.learningtolive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762012925182-3ep1qtotept99bri5svlliq7ou99q1d6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3wxtZ0r-RzoQh27Zf0qEP0Jg8X9UnoUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762012925182-3ep1qtotept99bri5svlliq7ou99q1d6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
