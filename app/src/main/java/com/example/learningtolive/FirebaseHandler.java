@@ -5,11 +5,17 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class FirebaseHandler {
     private final String TAG = "FirebaseHandler";
@@ -25,15 +31,17 @@ public class FirebaseHandler {
         ref.setValue(value);
     }
 
-    public String getValue(String reference) {
+    public void getValue(String reference, MyCallback myCallback) {
         DatabaseReference ref = db.getReference(reference);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+                HashMap<String, String> data = new HashMap<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Log.d(TAG, ds.getKey() + "  " + ds.getValue());
+                    data.put(ds.getKey(), ds.getValue().toString());
+                }
+                myCallback.onCallBack(data);
             }
 
             @Override
@@ -42,7 +50,5 @@ public class FirebaseHandler {
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
-        return "";
     }
-
 }
