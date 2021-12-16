@@ -42,7 +42,7 @@ public class FirebaseHandler {
                     Log.d(TAG, ds.getKey() + "  " + ds.getValue());
                     data.put(ds.getKey(), ds.getValue().toString());
                 }
-                myCallback.onCallBack(reference, data, !data.isEmpty());
+                myCallback.onCallBack(reference, data);
             }
 
             @Override

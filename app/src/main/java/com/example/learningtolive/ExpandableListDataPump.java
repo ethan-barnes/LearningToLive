@@ -22,9 +22,9 @@ public class ExpandableListDataPump {
             for (String ref : refs) {
                 fb.getValue(ref, new MyCallback() {
                     @Override
-                    public void onCallBack(String title, HashMap value, Boolean hasValue) {
-                        Log.d(TAG, value.toString());
-                        if (hasValue) {
+                    public void onCallBack(String title, HashMap value) {
+                        if (!value.isEmpty()) {
+                            Log.d(TAG, value.toString());
                             createLists(title, value, categoryActivity, context);
                         }
                     }
@@ -40,13 +40,13 @@ public class ExpandableListDataPump {
         HashMap<String, List<String>> expandableListDetail = new HashMap<>();
         HashMap<String, String> urls = new HashMap<>();
 
-        List<String> housing = new ArrayList<String>();
+        List<String> housing = new ArrayList<>();
         for (String key : hash.keySet()) {
             housing.add(key);
             urls.put(key, hash.get(key));
         }
 
-        expandableListDetail.put(title, housing);
+        expandableListDetail.put(categoryActivity.getSubCategory(title), housing);
         categoryActivity.updateLists(categoryActivity, expandableListDetail, urls, context);
     }
 }
