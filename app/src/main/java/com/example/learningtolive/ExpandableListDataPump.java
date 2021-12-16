@@ -28,14 +28,16 @@ public class ExpandableListDataPump {
     }
 
     private static void CreateLists(HashMap<String, String> hash, CategoryActivity categoryActivity, Context context) {
-        HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
+        HashMap<String, List<String>> expandableListDetail = new HashMap<>();
+        HashMap<String, String> urls = new HashMap<>();
 
         List<String> housing = new ArrayList<String>();
         for (String key : hash.keySet()) {
             housing.add(key);
+            urls.put(key, hash.get(key));
         }
 
         expandableListDetail.put("Housing and Accommodation", housing);
-        categoryActivity.updateLists(categoryActivity, expandableListDetail, context);
+        categoryActivity.updateLists(categoryActivity, expandableListDetail, urls, context);
     }
 }

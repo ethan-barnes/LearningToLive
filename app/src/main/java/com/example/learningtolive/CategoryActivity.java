@@ -1,7 +1,11 @@
 package com.example.learningtolive;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -19,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
+    private static String TAG = "CategoryActivity";
     static ExpandableListView expandableListView;
     static ExpandableListAdapter expandableListAdapter;
     static List<String> expandableListTitle;
@@ -42,7 +47,10 @@ public class CategoryActivity extends AppCompatActivity {
         ExpandableListDataPump.PopulateLists(this, getApplicationContext());
     }
 
-    public static void updateLists(CategoryActivity categoryActivity, HashMap<String, List<String>> expandableListDetail, Context context) {
+    public static void updateLists(CategoryActivity categoryActivity,
+                                   HashMap<String, List<String>> expandableListDetail,
+                                   HashMap<String, String> urls,
+                                   Context context) {
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(categoryActivity, expandableListTitle,
                 expandableListDetail);
@@ -69,13 +77,23 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                         int childPosition, long id) {
-                Toast.makeText(
-                        context,
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show();
+//                Toast.makeText(
+//                        context,
+//                        expandableListTitle.get(groupPosition)
+//                                + " -> "
+//                                + expandableListDetail.get(expandableListTitle.get(groupPosition)).get(
+//                                childPosition), Toast.LENGTH_SHORT
+//                ).show();
+
+                String url = urls.get(expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition));
+                Log.d(TAG, "URL: " + url);
+                try {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    categoryActivity.startActivity(browserIntent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(context, "Cannot open link, missing browser on device.", Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Error opening link: " + e);
+                }
                 return false;
             }
         });
