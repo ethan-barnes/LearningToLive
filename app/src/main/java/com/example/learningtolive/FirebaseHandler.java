@@ -33,6 +33,7 @@ public class FirebaseHandler {
 
     public void getValue(String reference, MyCallback myCallback) {
         DatabaseReference ref = db.getReference(reference);
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -41,12 +42,11 @@ public class FirebaseHandler {
                     Log.d(TAG, ds.getKey() + "  " + ds.getValue());
                     data.put(ds.getKey(), ds.getValue().toString());
                 }
-                myCallback.onCallBack(data);
+                myCallback.onCallBack(reference, data, !data.isEmpty());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });

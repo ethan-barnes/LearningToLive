@@ -9,17 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
@@ -27,11 +22,9 @@ public class CategoryActivity extends AppCompatActivity {
     static ExpandableListView expandableListView;
     static ExpandableListAdapter expandableListAdapter;
     static List<String> expandableListTitle;
-    static HashMap<String, List<String>> expandableListDetail;
+    static private HashMap<String, List<String>> activityExpandableListDetail = new HashMap<>();
+    static private HashMap<String, String> activityUrls = new HashMap<>();
 
-    // Will be stored in database in future
-    private final LinkedList<String> lifeList = new LinkedList<>();
-    private final LinkedList<String> housingList = new LinkedList<>();
     String category;
 
     @Override
@@ -44,16 +37,20 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        ExpandableListDataPump.PopulateLists(this, getApplicationContext());
+        ExpandableListDataPump.populateLists(this, getApplicationContext());
     }
 
     public static void updateLists(CategoryActivity categoryActivity,
                                    HashMap<String, List<String>> expandableListDetail,
                                    HashMap<String, String> urls,
                                    Context context) {
-        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
+        activityExpandableListDetail.putAll(expandableListDetail);
+        activityUrls.putAll(urls);
+
+
+        expandableListTitle = new ArrayList<String>(activityExpandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(categoryActivity, expandableListTitle,
-                expandableListDetail);
+                activityExpandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
             @Override
@@ -85,7 +82,7 @@ public class CategoryActivity extends AppCompatActivity {
 //                                childPosition), Toast.LENGTH_SHORT
 //                ).show();
 
-                String url = urls.get(expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition));
+                String url = activityUrls.get(activityExpandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition));
                 Log.d(TAG, "URL: " + url);
                 try {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

@@ -10,24 +10,33 @@ import java.util.List;
 public class ExpandableListDataPump {
     private final static String TAG = "ExpandableListDataPump";
 
-    public static void PopulateLists(CategoryActivity categoryActivity, Context context) {
-        GetData(categoryActivity, context);
+    public static void populateLists(CategoryActivity categoryActivity, Context context) {
+        getData(categoryActivity, context);
     }
 
-    public static HashMap<String, List<String>> GetData(CategoryActivity categoryActivity, Context context) {
+    public static void getData(CategoryActivity categoryActivity, Context context) {
         FirebaseHandler fb = new FirebaseHandler();
+        String[] refs = context.getResources().getStringArray(R.array.daily_life_references);
 
-        fb.getValue("housing", new MyCallback() {
-            @Override
-            public void onCallBack(HashMap value) {
-                Log.d(TAG, value.toString());
-                CreateLists(value, categoryActivity, context);
+        try {
+            for (String ref : refs) {
+                fb.getValue(ref, new MyCallback() {
+                    @Override
+                    public void onCallBack(String title, HashMap value, Boolean hasValue) {
+                        Log.d(TAG, value.toString());
+                        if (hasValue) {
+                            createLists(title, value, categoryActivity, context);
+                        }
+                    }
+                });
             }
-        });
-        return new HashMap<String, List<String>>();
+        } catch (Exception e) {
+            Log.e(TAG, "Could not get from FireBase. " + e);
+        }
+
     }
 
-    private static void CreateLists(HashMap<String, String> hash, CategoryActivity categoryActivity, Context context) {
+    private static void createLists(String title, HashMap<String, String> hash, CategoryActivity categoryActivity, Context context) {
         HashMap<String, List<String>> expandableListDetail = new HashMap<>();
         HashMap<String, String> urls = new HashMap<>();
 
@@ -37,7 +46,7 @@ public class ExpandableListDataPump {
             urls.put(key, hash.get(key));
         }
 
-        expandableListDetail.put("Housing and Accommodation", housing);
+        expandableListDetail.put(title, housing);
         categoryActivity.updateLists(categoryActivity, expandableListDetail, urls, context);
     }
 }
