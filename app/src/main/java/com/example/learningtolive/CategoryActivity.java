@@ -56,23 +56,6 @@ public class CategoryActivity extends AppCompatActivity {
         expandableListAdapter = new CustomExpandableListAdapter(categoryActivity, expandableListTitle,
                 activityExpandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(context,
-                        expandableListTitle.get(groupPosition) + " List Expanded. ",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener(){
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(context,
-                        expandableListTitle.get(groupPosition) + " List Collapsed. ",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
             @Override
