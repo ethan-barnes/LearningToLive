@@ -1,6 +1,9 @@
 package com.example.learningtolive;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Category {
 

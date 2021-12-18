@@ -3,23 +3,19 @@ package com.example.learningtolive;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
@@ -27,11 +23,10 @@ public class CategoryActivity extends AppCompatActivity {
     static ExpandableListView expandableListView;
     static ExpandableListAdapter expandableListAdapter;
     static List<String> expandableListTitle;
-    static HashMap<String, List<String>> expandableListDetail;
+    static private HashMap<String, List<String>> activityExpandableListDetail = new HashMap<>();
+    static private HashMap<String, String> activityUrls = new HashMap<>();
+    static private HashMap<String, String> categories = new HashMap<>();
 
-    // Will be stored in database in future
-    private final LinkedList<String> lifeList = new LinkedList<>();
-    private final LinkedList<String> housingList = new LinkedList<>();
     String category;
 
     @Override
@@ -43,17 +38,22 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        createCategoriesLists(this);
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        ExpandableListDataPump.PopulateLists(this, getApplicationContext());
+        ExpandableListDataPump.populateLists(this, getApplicationContext());
     }
 
     public static void updateLists(CategoryActivity categoryActivity,
                                    HashMap<String, List<String>> expandableListDetail,
                                    HashMap<String, String> urls,
                                    Context context) {
-        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
+        activityExpandableListDetail.putAll(expandableListDetail);
+        activityUrls.putAll(urls);
+
+
+        expandableListTitle = new ArrayList<String>(activityExpandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(categoryActivity, expandableListTitle,
-                expandableListDetail);
+                activityExpandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
             @Override
@@ -84,8 +84,7 @@ public class CategoryActivity extends AppCompatActivity {
 //                                + expandableListDetail.get(expandableListTitle.get(groupPosition)).get(
 //                                childPosition), Toast.LENGTH_SHORT
 //                ).show();
-
-                String url = urls.get(expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition));
+                String url =  activityUrls.get(activityExpandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition));
                 Log.d(TAG, "URL: " + url);
                 try {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -93,9 +92,28 @@ public class CategoryActivity extends AppCompatActivity {
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(context, "Cannot open link, missing browser on device.", Toast.LENGTH_LONG).show();
                     Log.e(TAG, "Error opening link: " + e);
+                } catch (ParseException pe) {
+                    Toast.makeText(context, "Cannot parse link.", Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Error parsing link: " + pe);
                 }
                 return false;
             }
         });
     }
+
+    public static String getSubCategory(String reference) {
+        return categories.get(reference);
+    }
+
+    private static void createCategoriesLists(Context context) {
+        String[] headings = context.getResources().getStringArray(R.array.daily_life_headings);
+        String[] refs = context.getResources().getStringArray(R.array.daily_life_references);
+
+        if (headings.length == refs.length) {
+            for(int i = 0; i < headings.length; i++) {
+                categories.put(refs[i], headings[i]);
+            }
+        }
+    }
+
 }
