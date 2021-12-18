@@ -1,0 +1,40 @@
+<resources>
+    <string-array name="daily_life_headings">
+        <item name="life_housing">Housing and Accommodation</item>
+        <item name="life_food">Food and Home</item>
+        <item name="life_eating">Eating Out</item>
+        <item name="life_money">Money and Banking</item>
+        <item name="life_family">Family Support and Childcare</item>
+        <item name="life_travel">Travel to Campus</item>
+        <item name="life_hospitals">Hospitals and Pharmacies</item>
+        <item name="life_local">Local Area</item>
+    </string-array>
+    <string-array name="daily_life_references">
+        <item name="life_housing">life_housing</item>
+        <item name="life_food">life_food</item>
+        <item name="life_eating">life_eating</item>
+        <item name="life_money">life_money</item>
+        <item name="life_family">life_family</item>
+        <item name="life_travel">life_travel</item>
+        <item name="life_hospitals">life_hospitals</item>
+        <item name="life_local">life_local</item>
+    </string-array>
+    <string-array name="health_headings">
+        <item name="health_online_psychological">Online Psychological Support</item>
+        <item name="health_dental">Health and Dental</item>
+        <item name="health_counselling">Counselling and Befriending</item>
+        <item name="health_worship">Worship and Prayer</item>
+        <item name="health_psychological">Psychological Support Services</item>
+        <item name="health_sleep">Sleep and Relaxation Advice</item>
+        <item name="health_accommodation">Living in Shared Accommodation</item>
+    </string-array>
+    <string-array name="health_references">
+        <item name="health_online_psychological">health_online_psychological</item>
+        <item name="health_dental">health_dental</item>
+        <item name="health_counselling">health_counselling</item>
+        <item name="health_worship">health_worship</item>
+        <item name="health_psychological">health_psychological</item>
+        <item name="health_sleep">health_sleep</item>
+        <item name="health_accommodation">health_accommodation</item>
+    </string-array>
+</resources>
