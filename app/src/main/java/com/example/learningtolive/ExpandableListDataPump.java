@@ -16,7 +16,7 @@ public class ExpandableListDataPump {
 
     public static void getData(CategoryActivity categoryActivity, Context context) {
         FirebaseHandler fb = new FirebaseHandler();
-        String[] refs = context.getResources().getStringArray(R.array.daily_life_references);
+        String[] refs = categoryActivity.references;
 
         try {
             for (String ref : refs) {
@@ -40,13 +40,13 @@ public class ExpandableListDataPump {
         HashMap<String, List<String>> expandableListDetail = new HashMap<>();
         HashMap<String, String> urls = new HashMap<>();
 
-        List<String> housing = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (String key : hash.keySet()) {
-            housing.add(key);
+            list.add(key);
             urls.put(key, hash.get(key));
         }
 
-        expandableListDetail.put(categoryActivity.getSubCategory(title), housing);
+        expandableListDetail.put(categoryActivity.getSubCategory(title), list);
         categoryActivity.updateLists(categoryActivity, expandableListDetail, urls, context);
     }
 }

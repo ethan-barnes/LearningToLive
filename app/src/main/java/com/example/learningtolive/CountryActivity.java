@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.LinkedList;
-
 public class CountryActivity extends AppCompatActivity {
     String country;
     Button dailyLifeButton;
@@ -34,7 +32,7 @@ public class CountryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Category c = new Category(Category.Name.DAILYLIFE);
-                selectCategory(v, c);
+                sendCategory(v, c);
             }
         });
 
@@ -43,7 +41,7 @@ public class CountryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Category c = new Category(Category.Name.HEALTH);
-                selectCategory(v, c);
+                sendCategory(v, c);
             }
         });
 
@@ -52,7 +50,7 @@ public class CountryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Category c = new Category(Category.Name.SETTLINGIN);
-                selectCategory(v, c);
+                sendCategory(v, c);
             }
         });
 
@@ -61,7 +59,7 @@ public class CountryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Category c = new Category(Category.Name.MIGRANTSTATUS);
-                selectCategory(v, c);
+                sendCategory(v, c);
             }
         });
 
@@ -70,30 +68,14 @@ public class CountryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Category c = new Category(Category.Name.LANGUAGE);
-                selectCategory(v, c);
+                sendCategory(v, c);
             }
         });
     }
 
-    private void selectCategory (View view, Category category) {
+    private void sendCategory(View view, Category category) {
         Intent intent = new Intent(this, CategoryActivity.class);
-        switch(category.name) {
-            case DAILYLIFE:
-                intent.putExtra("category", this.getResources().getString(R.string.daily_life));
-                break;
-            case HEALTH:
-                intent.putExtra("category", this.getResources().getString(R.string.health_button));
-                break;
-            case SETTLINGIN:
-                intent.putExtra("category", this.getResources().getString(R.string.settling_button));
-                break;
-            case MIGRANTSTATUS:
-                intent.putExtra("category", this.getResources().getString(R.string.migrant_button));
-                break;
-            case LANGUAGE:
-                intent.putExtra("category", this.getResources().getString(R.string.language_button));
-                break;
-        }
+        intent.putExtra("category", category);
         startActivity(intent);
     }
 }

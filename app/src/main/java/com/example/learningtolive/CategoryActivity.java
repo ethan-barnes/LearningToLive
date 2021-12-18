@@ -27,18 +27,19 @@ public class CategoryActivity extends AppCompatActivity {
     static private HashMap<String, String> activityUrls = new HashMap<>();
     static private HashMap<String, String> categories = new HashMap<>();
 
-    String category;
+    static public String[] references = {};
+    Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            category = extras.getString("category");
+            category = (Category) getIntent().getSerializableExtra("category");
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        createCategoriesLists(this);
+        createCategoriesLists(this, category);
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         ExpandableListDataPump.populateLists(this, getApplicationContext());
     }
@@ -55,35 +56,11 @@ public class CategoryActivity extends AppCompatActivity {
         expandableListAdapter = new CustomExpandableListAdapter(categoryActivity, expandableListTitle,
                 activityExpandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(context,
-                        expandableListTitle.get(groupPosition) + " List Expanded. ",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener(){
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(context,
-                        expandableListTitle.get(groupPosition) + " List Collapsed. ",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                         int childPosition, long id) {
-//                Toast.makeText(
-//                        context,
-//                        expandableListTitle.get(groupPosition)
-//                                + " -> "
-//                                + expandableListDetail.get(expandableListTitle.get(groupPosition)).get(
-//                                childPosition), Toast.LENGTH_SHORT
-//                ).show();
                 String url =  activityUrls.get(activityExpandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition));
                 Log.d(TAG, "URL: " + url);
                 try {
@@ -105,13 +82,31 @@ public class CategoryActivity extends AppCompatActivity {
         return categories.get(reference);
     }
 
-    private static void createCategoriesLists(Context context) {
-        String[] headings = context.getResources().getStringArray(R.array.daily_life_headings);
-        String[] refs = context.getResources().getStringArray(R.array.daily_life_references);
+    private static void createCategoriesLists(Context context, Category category) {
+        String[] headings = {};
+        activityExpandableListDetail.clear();
+        activityUrls.clear();
 
-        if (headings.length == refs.length) {
+        switch (category.name){
+            case DAILYLIFE:
+                headings = context.getResources().getStringArray(R.array.daily_life_headings);
+                references = context.getResources().getStringArray(R.array.daily_life_references);
+                break;
+            case HEALTH:
+                headings = context.getResources().getStringArray(R.array.health_headings);
+                references = context.getResources().getStringArray(R.array.health_references);
+                break;
+            case SETTLINGIN:
+                break;
+            case MIGRANTSTATUS:
+                break;
+            case LANGUAGE:
+                break;
+        }
+
+        if (headings.length == references.length) {
             for(int i = 0; i < headings.length; i++) {
-                categories.put(refs[i], headings[i]);
+                categories.put(references[i], headings[i]);
             }
         }
     }

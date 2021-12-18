@@ -2,10 +2,11 @@ package com.example.learningtolive;
 
 import android.content.Context;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Category {
+public class Category implements Serializable {
 
     enum Name {
         DAILYLIFE,
