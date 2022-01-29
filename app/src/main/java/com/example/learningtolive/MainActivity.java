@@ -84,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("country", this.getResources().getString(R.string.finland));
                 break;
         }
-
-        //EditText editText = (EditText) findViewById(R.id.);
-        //String message = editText.getText().toString();
-        //intent.putExtra(COUNTRY_NAME, 0);
         startActivity(intent);
     }
 }

@@ -121,10 +121,16 @@ public class CategoryActivity extends AppCompatActivity {
                 references = context.getResources().getStringArray(R.array.health_references);
                 break;
             case SETTLINGIN:
+                headings = context.getResources().getStringArray(R.array.settling_headings);
+                references = context.getResources().getStringArray(R.array.settling_references);
                 break;
             case MIGRANTSTATUS:
+                headings = context.getResources().getStringArray(R.array.migrant_headings);
+                references = context.getResources().getStringArray(R.array.migrant_references);
                 break;
             case LANGUAGE:
+                headings = context.getResources().getStringArray(R.array.language_headings);
+                references = context.getResources().getStringArray(R.array.language_references);
                 break;
         }
 
