@@ -19,6 +19,7 @@
         <item name="life_hospitals">life_hospitals</item>
         <item name="life_local">life_local</item>
     </string-array>
+
     <string-array name="health_headings">
         <item name="health_online_psychological">Online Psychological Support</item>
         <item name="health_dental">Health and Dental</item>
@@ -36,5 +37,26 @@
         <item name="health_psychological">health_psychological</item>
         <item name="health_sleep">health_sleep</item>
         <item name="health_accommodation">health_accommodation</item>
+    </string-array>
+
+    <string-array name="settling_headings">
+        <item name="settling_friend_finder">Friend Finder</item>
+    </string-array>
+    <string-array name="settling_references">
+        <item name="settling_friend_finder">settling_friend_finder</item>
+    </string-array>
+
+    <string-array name="migrant_headings">
+        <item name="migrant_visa">Visa, Legal Advice and Embassies</item>
+    </string-array>
+    <string-array name="migrant_references">
+        <item name="migrant_visa">migrant_visa</item>
+    </string-array>
+
+    <string-array name="language_headings">
+        <item name="language_tools">Language Tools</item>
+    </string-array>
+    <string-array name="language_references">
+        <item name="language_tools">language_tools</item>
     </string-array>
 </resources>

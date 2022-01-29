@@ -26,11 +26,21 @@ public class FirebaseHandler {
         db = FirebaseDatabase.getInstance(firebaseUrl);
     }
 
+    /***
+     * Unused method, sets value in FireBase.
+     * @param reference name of FireBase reference.
+     * @param value string value.
+     */
     public void setValue(String reference, Object value) {
         DatabaseReference ref = db.getReference(reference);
         ref.setValue(value);
     }
 
+    /***
+     *
+     * @param reference the FireBase reference to be requested.
+     * @param myCallback used to handle asynchronous calls of FireBase.
+     */
     public void getValue(String reference, MyCallback myCallback) {
         DatabaseReference ref = db.getReference(reference);
 
@@ -39,9 +49,9 @@ public class FirebaseHandler {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String, String> data = new HashMap<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Log.d(TAG, ds.getKey() + "  " + ds.getValue());
                     data.put(ds.getKey(), ds.getValue().toString());
                 }
+                // Sends data back to ExpandableListDataPump.
                 myCallback.onCallBack(reference, data);
             }
 
