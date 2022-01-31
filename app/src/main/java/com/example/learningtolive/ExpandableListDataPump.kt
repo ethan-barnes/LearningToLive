@@ -25,14 +25,16 @@ object ExpandableListDataPump {
     private fun getData(categoryActivity: CategoryActivity, context: Context) {
         val fb = FirebaseHandler()
         val refs = CategoryActivity.references
+
         try {
             for (ref in refs) {
-                fb.getValue(ref!!) { title, value ->
-                    // Callback used to return value from asynchronous FireBase requests.
-                    if (value.isNotEmpty()) { // Some headings may not be stored in FireBase.
-                        createLists(title, value, categoryActivity, context)
+                fb.getValue(ref!!, object : MyCallback {
+                    override fun onCallBack(title: String?, value: java.util.HashMap<String?, String?>?) {
+                        if (value!!.isNotEmpty()) {
+                            createLists(title!!, value, categoryActivity, context)
+                        }
                     }
-                }
+                })
             }
         } catch (e: Exception) {
             Log.e(TAG, "Could not get from FireBase. $e")
@@ -47,16 +49,19 @@ object ExpandableListDataPump {
      * @param categoryActivity the categoryActivity object that will be displaying our information.
      * @param context static method needs context.
      */
-    private fun createLists(title: String, hash: HashMap<String, String>,
+    private fun createLists(title: String, hash: HashMap<String?, String?>?,
                             categoryActivity: CategoryActivity, context: Context) {
         val expandableListDetail = HashMap<String, List<String>>()
         val urls = HashMap<String, String?>()
         val list = mutableListOf<String>();
 
-        for (key in hash.keys) {
-            list.add(key)
-            urls[key] = hash[key]
+        if (!hash.isNullOrEmpty()){
+            for (key in hash.keys) {
+                list.add(key!!)
+                urls[key] = hash[key]
+            }
         }
+
         expandableListDetail[CategoryActivity.getSubCategory(title)] = list
         CategoryActivity.updateLists(categoryActivity, expandableListDetail, urls, context)
     }

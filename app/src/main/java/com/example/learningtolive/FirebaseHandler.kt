@@ -31,7 +31,7 @@ class FirebaseHandler {
         val ref = db.getReference(reference)
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = HashMap<String?, String>()
+                val data = HashMap<String?, String?>()
                 for (ds in dataSnapshot.children) {
                     if (ds.key != null) {
                         data[ds.key] = ds.value.toString()
