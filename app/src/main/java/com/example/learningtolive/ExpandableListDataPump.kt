@@ -28,7 +28,7 @@ object ExpandableListDataPump {
 
         try {
             for (ref in refs) {
-                fb.getValue(ref!!, object : MyCallback {
+                fb.getValue(ref, object : MyCallback {
                     override fun onCallBack(title: String?, value: java.util.HashMap<String?, String?>?) {
                         if (value!!.isNotEmpty()) {
                             createLists(title!!, value, categoryActivity, context)
@@ -52,17 +52,17 @@ object ExpandableListDataPump {
     private fun createLists(title: String, hash: HashMap<String?, String?>?,
                             categoryActivity: CategoryActivity, context: Context) {
         val expandableListDetail = HashMap<String, List<String>>()
-        val urls = HashMap<String, String?>()
+        val urls = HashMap<String, String>()
         val list = mutableListOf<String>();
 
         if (!hash.isNullOrEmpty()){
             for (key in hash.keys) {
                 list.add(key!!)
-                urls[key] = hash[key]
+                urls[key] = hash[key].toString()
             }
         }
 
-        expandableListDetail[CategoryActivity.getSubCategory(title)] = list
+        expandableListDetail[CategoryActivity.getSubCategory(title)!!] = list
         CategoryActivity.updateLists(categoryActivity, expandableListDetail, urls, context)
     }
 }

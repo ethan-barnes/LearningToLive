@@ -2,6 +2,8 @@ package com.example.learningtolive;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -12,9 +14,9 @@ import android.widget.TextView;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private Context context;
-    private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    private final Context context;
+    private final List<String> expandableListTitle;
+    private final HashMap<String, List<String>> expandableListDetail;
 
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle,
                                        HashMap<String, List<String>> expandableListDetail) {
@@ -25,8 +27,8 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .get(expandedListPosition);
+        return Objects.requireNonNull(this.expandableListDetail
+                .get(this.expandableListTitle.get(listPosition))).get(expandedListPosition);
     }
 
     @Override
@@ -51,8 +53,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int listPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .size();
+        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition)).size();
     }
 
     @Override
