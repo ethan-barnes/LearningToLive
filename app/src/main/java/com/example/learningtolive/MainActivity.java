@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     // Called when country button is pressed
     private void selectCountry(View view, Country country) {
         Intent intent = new Intent(this, CountryActivity.class);
-        switch (country.name) {
+        switch (country.getName()) {
             case UNITEDKINGDOM:
                 intent.putExtra("country", this.getResources().getString(R.string.united_kingdom));
                 break;
