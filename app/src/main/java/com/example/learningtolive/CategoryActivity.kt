@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.Toast
@@ -18,6 +19,7 @@ import kotlin.collections.HashMap
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val extras = intent.extras
         // Category object is used to control what links to display in expandable list.
@@ -28,6 +30,7 @@ class CategoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_category)
         createCategoriesLists(this, category)
         expandableListView = findViewById<View>(R.id.expandableListView) as ExpandableListView
+        refreshBtn = findViewById<View>(R.id.refreshBtn) as Button
         populateLists(this, applicationContext)
     }
 
@@ -36,15 +39,18 @@ class CategoryActivity : AppCompatActivity() {
         lateinit var expandableListView: ExpandableListView
         private lateinit var expandableListAdapter: ExpandableListAdapter
         private lateinit var expandableListTitle: List<String>
+        private lateinit var refreshBtn: Button
         private val activityExpandableListDetail = HashMap<String, List<String>>()
         private val activityUrls = HashMap<String, String>()
         private val categories = HashMap<String, String>()
+        private var displayRefresh = false
         var references = arrayOf<String>()
 
         /***
          * Creates expandable list and handles opening of URLs. Called for each heading in FireBase.
          * @param categoryActivity used to create browser activity.
-         * @param expandableListDetail HashMap that contains headings and list of URL names from FireBase.
+         * @param expandableListDetail HashMap that contains headings and list of URL names from
+         * FireBase.
          * @param urls List of URLs taken from FireBase
          * @param context static method needs context to create toast.
          */
@@ -52,42 +58,49 @@ class CategoryActivity : AppCompatActivity() {
             categoryActivity: CategoryActivity,
             expandableListDetail: HashMap<String, List<String>>?,
             urls: HashMap<String, String>,
-            context: Context?
+            context: Context
         ) {
-            /* Stores our URls and URL text in the object. Headings are taken one at a time from FireBase
-        so this information needs to be stored here so it can all be displayed at once. */
+            /* Stores our URls and URL text in the object. Headings are taken one at a time from
+            FireBase so this information needs to be stored here so it can all be displayed at
+            once. */
             activityExpandableListDetail.putAll(expandableListDetail!!)
             activityUrls.putAll(urls)
 
-            // Creating the expandable list.
-            expandableListTitle = ArrayList(activityExpandableListDetail.keys)
-            expandableListAdapter = CustomExpandableListAdapter(
-                categoryActivity, expandableListTitle,
-                activityExpandableListDetail
-            )
-            expandableListView.setAdapter(expandableListAdapter)
+            if (displayRefresh) {
+                createRefreshBtn(categoryActivity, expandableListDetail, urls, context)
+            } else {
+                // Creating the expandable list.
+                expandableListTitle = ArrayList(activityExpandableListDetail.keys)
+                expandableListAdapter = CustomExpandableListAdapter(
+                    categoryActivity, expandableListTitle,
+                    activityExpandableListDetail
+                )
+                expandableListView.setAdapter(expandableListAdapter)
 
-            // Attempts to open the URL in phone's browser, catches exceptions if it cannot.
-            expandableListView.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
-                val url =
-                    activityUrls[activityExpandableListDetail[(expandableListTitle as ArrayList<String>)[groupPosition]]!![childPosition]]
-                Log.d(TAG, "URL: $url")
-                try {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    categoryActivity.startActivity(browserIntent)
-                } catch (e: ActivityNotFoundException) {
-                    Toast.makeText(
-                        context,
-                        "Cannot open link, missing browser on device.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    Log.e(TAG, "Error opening link: $e")
-                } catch (pe: ParseException) {
-                    Toast.makeText(context, "Cannot parse link.", Toast.LENGTH_LONG).show()
-                    Log.e(TAG, "Error parsing link: $pe")
+                // Attempts to open the URL in phone's browser, catches exceptions if it cannot.
+                expandableListView.setOnChildClickListener { _, _, groupPosition, childPosition,
+                                                             _ ->
+                    val url = activityUrls[activityExpandableListDetail[(expandableListTitle
+                            as ArrayList<String>)[groupPosition]]!![childPosition]]
+                    Log.d(TAG, "URL: $url")
+                    try {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        categoryActivity.startActivity(browserIntent)
+                    } catch (e: ActivityNotFoundException) {
+                        Toast.makeText(
+                            context,
+                            "Cannot open link, missing browser on device.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        Log.e(TAG, "Error opening link: $e")
+                    } catch (pe: ParseException) {
+                        Toast.makeText(context, "Cannot parse link.", Toast.LENGTH_LONG).show()
+                        Log.e(TAG, "Error parsing link: $pe")
+                    }
+                    false
                 }
-                false
             }
+            displayRefresh = true
         }
 
         /***
@@ -100,6 +113,29 @@ class CategoryActivity : AppCompatActivity() {
         }
 
         /***
+         * When firebase is updated, refresh button will be displayed instead of immediately
+         * updating the lists.
+         * @param categoryActivity storing the info for when we update the list
+         * @param expandableListDetail storing the info for when we update the list
+         * @param urls storing the info for when we update the list
+         * @param context static method needs context to get class properties.
+         */
+        private fun createRefreshBtn(
+            categoryActivity: CategoryActivity,
+            expandableListDetail: HashMap<String, List<String>>?,
+            urls: HashMap<String, String>,
+            context: Context
+        ) {
+            refreshBtn.visibility = View.VISIBLE
+
+            refreshBtn.setOnClickListener {
+                displayRefresh = false
+                refreshBtn.visibility = View.INVISIBLE
+                updateLists(categoryActivity, expandableListDetail, urls, context)
+            }
+        }
+
+        /***
          * Sets values that are used by FirebaseHandler to create links in expandable list.
          * @param context static method needs context to get class properties.
          * @param category is used to select correct links from firebase.
@@ -107,7 +143,8 @@ class CategoryActivity : AppCompatActivity() {
         private fun createCategoriesLists(context: Context, category: Category?) {
             var headings = arrayOf<String>()
 
-            // Clear HashMaps to prevent irrelevant links being left over from previously visited pages.
+            // Clear HashMaps to prevent irrelevant links being left over from previously visited
+            // pages.
             activityExpandableListDetail.clear()
             activityUrls.clear()
             when (category!!.name) {
