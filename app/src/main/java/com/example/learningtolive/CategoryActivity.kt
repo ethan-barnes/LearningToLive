@@ -18,6 +18,7 @@ import kotlin.collections.HashMap
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val extras = intent.extras
         // Category object is used to control what links to display in expandable list.
@@ -44,7 +45,8 @@ class CategoryActivity : AppCompatActivity() {
         /***
          * Creates expandable list and handles opening of URLs. Called for each heading in FireBase.
          * @param categoryActivity used to create browser activity.
-         * @param expandableListDetail HashMap that contains headings and list of URL names from FireBase.
+         * @param expandableListDetail HashMap that contains headings and list of URL names from
+         * FireBase.
          * @param urls List of URLs taken from FireBase
          * @param context static method needs context to create toast.
          */
@@ -52,25 +54,29 @@ class CategoryActivity : AppCompatActivity() {
             categoryActivity: CategoryActivity,
             expandableListDetail: HashMap<String, List<String>>?,
             urls: HashMap<String, String>,
-            context: Context?
+            context: Context
         ) {
-            /* Stores our URls and URL text in the object. Headings are taken one at a time from FireBase
-        so this information needs to be stored here so it can all be displayed at once. */
+            /* Stores our URls and URL text in the object. Headings are taken one at a time from
+            FireBase so this information needs to be stored here so it can all be displayed at
+            once. */
             activityExpandableListDetail.putAll(expandableListDetail!!)
             activityUrls.putAll(urls)
 
             // Creating the expandable list.
             expandableListTitle = ArrayList(activityExpandableListDetail.keys)
+
             expandableListAdapter = CustomExpandableListAdapter(
                 categoryActivity, expandableListTitle,
                 activityExpandableListDetail
             )
-            expandableListView.setAdapter(expandableListAdapter)
+
+            expandList()
 
             // Attempts to open the URL in phone's browser, catches exceptions if it cannot.
-            expandableListView.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
-                val url =
-                    activityUrls[activityExpandableListDetail[(expandableListTitle as ArrayList<String>)[groupPosition]]!![childPosition]]
+            expandableListView.setOnChildClickListener { _, _, groupPosition, childPosition,
+                                                         _ ->
+                val url = activityUrls[activityExpandableListDetail[(expandableListTitle
+                        as ArrayList<String>)[groupPosition]]!![childPosition]]
                 Log.d(TAG, "URL: $url")
                 try {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -91,6 +97,28 @@ class CategoryActivity : AppCompatActivity() {
         }
 
         /***
+         * Will keep list items expanded when/if content gets updated in Firebase.
+         */
+        private fun expandList() {
+            var toExpand = arrayOfNulls<Boolean>(expandableListAdapter.groupCount)
+            var doExpand = false
+            for (i in 0 until expandableListAdapter.groupCount) {
+                if (expandableListView.adapter != null) {
+                    toExpand[i] = expandableListView.isGroupExpanded(i)
+                    doExpand = true
+                }
+            }
+            expandableListView.setAdapter(expandableListAdapter)
+            for (j in toExpand.indices) {
+                if (doExpand) {
+                    if (toExpand[j]!!) {
+                        expandableListView.expandGroup(j)
+                    }
+                }
+            }
+        }
+
+        /***
          * Used to translate FireBase reference into human-readable heading text.
          * @param reference FireBase reference.
          * @return Human-readable heading that is mapped to FireBase reference.
@@ -107,7 +135,8 @@ class CategoryActivity : AppCompatActivity() {
         private fun createCategoriesLists(context: Context, category: Category?) {
             var headings = arrayOf<String>()
 
-            // Clear HashMaps to prevent irrelevant links being left over from previously visited pages.
+            // Clear HashMaps to prevent irrelevant links being left over from previously visited
+            // pages.
             activityExpandableListDetail.clear()
             activityUrls.clear()
             when (category!!.name) {
