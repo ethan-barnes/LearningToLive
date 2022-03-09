@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.Toast
@@ -30,7 +29,6 @@ class CategoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_category)
         createCategoriesLists(this, category)
         expandableListView = findViewById<View>(R.id.expandableListView) as ExpandableListView
-        refreshBtn = findViewById<View>(R.id.refreshBtn) as Button
         populateLists(this, applicationContext)
     }
 
@@ -39,7 +37,6 @@ class CategoryActivity : AppCompatActivity() {
         lateinit var expandableListView: ExpandableListView
         private lateinit var expandableListAdapter: ExpandableListAdapter
         private lateinit var expandableListTitle: List<String>
-        private lateinit var refreshBtn: Button
         private val activityExpandableListDetail = HashMap<String, List<String>>()
         private val activityUrls = HashMap<String, String>()
         private val categories = HashMap<String, String>()
