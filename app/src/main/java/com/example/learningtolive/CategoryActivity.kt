@@ -43,7 +43,6 @@ class CategoryActivity : AppCompatActivity() {
         private val activityExpandableListDetail = HashMap<String, List<String>>()
         private val activityUrls = HashMap<String, String>()
         private val categories = HashMap<String, String>()
-        private var displayRefresh = false
         var references = arrayOf<String>()
 
         /***
@@ -66,41 +65,60 @@ class CategoryActivity : AppCompatActivity() {
             activityExpandableListDetail.putAll(expandableListDetail!!)
             activityUrls.putAll(urls)
 
-            if (displayRefresh) {
-                createRefreshBtn(categoryActivity, expandableListDetail, urls, context)
-            } else {
-                // Creating the expandable list.
-                expandableListTitle = ArrayList(activityExpandableListDetail.keys)
-                expandableListAdapter = CustomExpandableListAdapter(
-                    categoryActivity, expandableListTitle,
-                    activityExpandableListDetail
-                )
-                expandableListView.setAdapter(expandableListAdapter)
+            // Creating the expandable list.
+            expandableListTitle = ArrayList(activityExpandableListDetail.keys)
 
-                // Attempts to open the URL in phone's browser, catches exceptions if it cannot.
-                expandableListView.setOnChildClickListener { _, _, groupPosition, childPosition,
-                                                             _ ->
-                    val url = activityUrls[activityExpandableListDetail[(expandableListTitle
-                            as ArrayList<String>)[groupPosition]]!![childPosition]]
-                    Log.d(TAG, "URL: $url")
-                    try {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                        categoryActivity.startActivity(browserIntent)
-                    } catch (e: ActivityNotFoundException) {
-                        Toast.makeText(
-                            context,
-                            "Cannot open link, missing browser on device.",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        Log.e(TAG, "Error opening link: $e")
-                    } catch (pe: ParseException) {
-                        Toast.makeText(context, "Cannot parse link.", Toast.LENGTH_LONG).show()
-                        Log.e(TAG, "Error parsing link: $pe")
-                    }
-                    false
+            expandableListAdapter = CustomExpandableListAdapter(
+                categoryActivity, expandableListTitle,
+                activityExpandableListDetail
+            )
+
+            expandList()
+
+            // Attempts to open the URL in phone's browser, catches exceptions if it cannot.
+            expandableListView.setOnChildClickListener { _, _, groupPosition, childPosition,
+                                                         _ ->
+                val url = activityUrls[activityExpandableListDetail[(expandableListTitle
+                        as ArrayList<String>)[groupPosition]]!![childPosition]]
+                Log.d(TAG, "URL: $url")
+                try {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    categoryActivity.startActivity(browserIntent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(
+                        context,
+                        "Cannot open link, missing browser on device.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    Log.e(TAG, "Error opening link: $e")
+                } catch (pe: ParseException) {
+                    Toast.makeText(context, "Cannot parse link.", Toast.LENGTH_LONG).show()
+                    Log.e(TAG, "Error parsing link: $pe")
+                }
+                false
+            }
+        }
+
+        /***
+         * Will keep list items expanded when/if content gets updated in Firebase.
+         */
+        private fun expandList() {
+            var toExpand = arrayOfNulls<Boolean>(expandableListAdapter.groupCount)
+            var doExpand = false
+            for (i in 0 until expandableListAdapter.groupCount) {
+                if (expandableListView.adapter != null) {
+                    toExpand[i] = expandableListView.isGroupExpanded(i)
+                    doExpand = true
                 }
             }
-            displayRefresh = true
+            expandableListView.setAdapter(expandableListAdapter)
+            for (j in toExpand.indices) {
+                if (doExpand) {
+                    if (toExpand[j]!!) {
+                        expandableListView.expandGroup(j)
+                    }
+                }
+            }
         }
 
         /***
@@ -110,29 +128,6 @@ class CategoryActivity : AppCompatActivity() {
          */
         fun getSubCategory(reference: String): String? {
             return categories[reference]
-        }
-
-        /***
-         * When firebase is updated, refresh button will be displayed instead of immediately
-         * updating the lists.
-         * @param categoryActivity storing the info for when we update the list
-         * @param expandableListDetail storing the info for when we update the list
-         * @param urls storing the info for when we update the list
-         * @param context static method needs context to get class properties.
-         */
-        private fun createRefreshBtn(
-            categoryActivity: CategoryActivity,
-            expandableListDetail: HashMap<String, List<String>>?,
-            urls: HashMap<String, String>,
-            context: Context
-        ) {
-            refreshBtn.visibility = View.VISIBLE
-
-            refreshBtn.setOnClickListener {
-                displayRefresh = false
-                refreshBtn.visibility = View.INVISIBLE
-                updateLists(categoryActivity, expandableListDetail, urls, context)
-            }
         }
 
         /***
