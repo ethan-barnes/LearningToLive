@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/refreshBtn"
-        android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:layout_alignParentBottom="true"
-        android:text="@string/refresh_button"
-        android:visibility="invisible" />
-
     <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
