@@ -6,68 +6,108 @@
     android:layout_height="match_parent"
     tools:context=".CountryActivity">
 
-    <TextView
-        android:id="@+id/countryNameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/daily_life_button"
-        android:layout_width="412dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="96dp"
-        android:text="@string/daily_life"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/countryNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/health_button"
-        android:layout_width="412dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/health_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daily_life_button" />
+            <Button
+                android:id="@+id/daily_life_button"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:text="@string/daily_life"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/settling_button"
-        android:layout_width="412dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/settling_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/health_button" />
+            <Button
+                android:id="@+id/migrant_button"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:text="@string/migrant_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settling_button" />
 
-    <Button
-        android:id="@+id/migrant_button"
-        android:layout_width="412dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/migrant_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settling_button" />
+            <Button
+                android:id="@+id/health_button"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:text="@string/health_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daily_life_button" />
 
-    <Button
-        android:id="@+id/language_button"
-        android:layout_width="412dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/language_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/migrant_button" />
+            <Button
+                android:id="@+id/settling_button"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:text="@string/settling_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/health_button" />
+
+            <Button
+                android:id="@+id/language_button"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_row="5"
+                android:layout_column="1"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:text="@string/language_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/migrant_button" />
+
+            <Button
+                android:id="@+id/contact_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="6"
+                android:layout_column="1"
+                android:layout_gravity="top|center"
+                android:text="@string/contact_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/language_button" />
+
+        </GridLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
