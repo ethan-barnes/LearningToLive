@@ -25,10 +25,12 @@ object ExpandableListDataPump {
     private fun getData(categoryActivity: CategoryActivity, context: Context) {
         val fb = FirebaseHandler()
         val refs = CategoryActivity.references
+        val country = categoryActivity.intent.extras?.getString("country")
 
         try {
             for (ref in refs) {
-                fb.getValue(ref, object : MyCallback {
+                var countryRef = "$country/$ref"
+                fb.getValue(countryRef, object : MyCallback {
                     override fun onCallBack(
                         title: String?,
                         value: java.util.HashMap<String?, String?>?
