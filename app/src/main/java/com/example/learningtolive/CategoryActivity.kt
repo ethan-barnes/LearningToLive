@@ -18,16 +18,18 @@ import kotlin.collections.HashMap
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category
+    private lateinit var country: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val extras = intent.extras
         // Category object is used to control what links to display in expandable list.
         if (extras != null) {
             category = (intent.getSerializableExtra("category") as Category?)!!
+            country = extras.getString("country")!!
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
-        createCategoriesLists(this, category)
+        createCategoriesLists(this, category, country)
         expandableListView = findViewById<View>(R.id.expandableListView) as ExpandableListView
         populateLists(this, applicationContext)
     }
@@ -132,7 +134,7 @@ class CategoryActivity : AppCompatActivity() {
          * @param context static method needs context to get class properties.
          * @param category is used to select correct links from firebase.
          */
-        private fun createCategoriesLists(context: Context, category: Category?) {
+        private fun createCategoriesLists(context: Context, category: Category?, country: String) {
             var headings = arrayOf<String>()
 
             // Clear HashMaps to prevent irrelevant links being left over from previously visited
@@ -165,7 +167,8 @@ class CategoryActivity : AppCompatActivity() {
             // Provides mapping between FireBase reference name and human-readable heading in app.
             if (headings.size == references.size) {
                 for (i in headings.indices) {
-                    categories[references[i]] = headings[i]
+                    val id = country + "/" + references[i]
+                    categories[id] = headings[i]
                 }
             }
         }

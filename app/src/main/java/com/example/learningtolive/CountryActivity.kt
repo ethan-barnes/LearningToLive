@@ -29,33 +29,34 @@ class CountryActivity : AppCompatActivity() {
         dailyLifeButton = findViewById<View>(R.id.daily_life_button) as Button
         dailyLifeButton.setOnClickListener { v ->
             val c = Category(Category.Name.DAILYLIFE)
-            sendCategory(v, c)
+            sendCategory(v, c, country)
         }
         healthButton = findViewById<View>(R.id.health_button) as Button
         healthButton.setOnClickListener { v ->
             val c = Category(Category.Name.HEALTH)
-            sendCategory(v, c)
+            sendCategory(v, c, country)
         }
         settlingButton = findViewById<View>(R.id.settling_button) as Button
         settlingButton.setOnClickListener { v ->
             val c = Category(Category.Name.SETTLINGIN)
-            sendCategory(v, c)
+            sendCategory(v, c, country)
         }
         migrantButton = findViewById<View>(R.id.migrant_button) as Button
         migrantButton.setOnClickListener { v ->
             val c = Category(Category.Name.MIGRANTSTATUS)
-            sendCategory(v, c)
+            sendCategory(v, c, country)
         }
         languageButton = findViewById<View>(R.id.language_button) as Button
         languageButton.setOnClickListener { v ->
             val c = Category(Category.Name.LANGUAGE)
-            sendCategory(v, c)
+            sendCategory(v, c, country)
         }
     }
 
-    private fun sendCategory(view: View, category: Category) {
+    private fun sendCategory(view: View, category: Category, country: String) {
         val intent = Intent(this, CategoryActivity::class.java)
         intent.putExtra("category", category)
+        intent.putExtra("country", country)
         startActivity(intent)
     }
 }
