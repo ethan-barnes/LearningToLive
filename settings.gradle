@@ -10,4 +10,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LearningToLive"
 include ':app'
-include ':kotlinmultiplatformsharedmodule'
+include ':shared'

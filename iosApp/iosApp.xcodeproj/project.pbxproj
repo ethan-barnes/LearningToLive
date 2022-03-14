@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA8F153027DF5CD900D90781 /* LearningToLiveIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F152027DF5CD800D90781 /* LearningToLiveIOSApp.swift */; };
-		DA8F153127DF5CD900D90781 /* LearningToLiveIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F152027DF5CD800D90781 /* LearningToLiveIOSApp.swift */; };
 		DA8F153227DF5CD900D90781 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F152127DF5CD800D90781 /* ContentView.swift */; };
 		DA8F153327DF5CD900D90781 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F152127DF5CD800D90781 /* ContentView.swift */; };
 		DA8F153427DF5CD900D90781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8F152227DF5CD900D90781 /* Assets.xcassets */; };
 		DA8F153527DF5CD900D90781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8F152227DF5CD900D90781 /* Assets.xcassets */; };
+		DA8F154027DF6BF000D90781 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F153F27DF6BF000D90781 /* iosApp.swift */; };
+		DA8F154127DF6BF000D90781 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F153F27DF6BF000D90781 /* iosApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DA8F152027DF5CD800D90781 /* LearningToLiveIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningToLiveIOSApp.swift; sourceTree = "<group>"; };
 		DA8F152127DF5CD800D90781 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA8F152227DF5CD900D90781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA8F152727DF5CD900D90781 /* LearningToLiveIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningToLiveIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8F152D27DF5CD900D90781 /* LearningToLiveIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningToLiveIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8F152F27DF5CD900D90781 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		DA8F153F27DF6BF000D90781 /* iosApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 		DA8F151F27DF5CD800D90781 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				DA8F152027DF5CD800D90781 /* LearningToLiveIOSApp.swift */,
+				DA8F153F27DF6BF000D90781 /* iosApp.swift */,
 				DA8F152127DF5CD800D90781 /* ContentView.swift */,
 				DA8F152227DF5CD900D90781 /* Assets.xcassets */,
 			);
@@ -188,7 +188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT/..\"\nchmod +x gradlew\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -198,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA8F153227DF5CD900D90781 /* ContentView.swift in Sources */,
-				DA8F153027DF5CD900D90781 /* LearningToLiveIOSApp.swift in Sources */,
+				DA8F154027DF6BF000D90781 /* iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA8F153327DF5CD900D90781 /* ContentView.swift in Sources */,
-				DA8F153127DF5CD900D90781 /* LearningToLiveIOSApp.swift in Sources */,
+				DA8F154127DF6BF000D90781 /* iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +251,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -268,8 +269,10 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -310,6 +313,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -320,8 +324,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
@@ -333,6 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n",
 				);
@@ -348,6 +356,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"shared\n",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.LearningToLiveIOS;
 				PRODUCT_NAME = LearningToLiveIOS;
 				SDKROOT = iphoneos;
@@ -365,6 +378,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n",
 				);
@@ -380,6 +394,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"shared\n",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.LearningToLiveIOS;
 				PRODUCT_NAME = LearningToLiveIOS;
 				SDKROOT = iphoneos;
@@ -410,7 +429,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.LearningToLiveIOS;
 				PRODUCT_NAME = LearningToLiveIOS;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -436,7 +455,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.LearningToLiveIOS;
 				PRODUCT_NAME = LearningToLiveIOS;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
