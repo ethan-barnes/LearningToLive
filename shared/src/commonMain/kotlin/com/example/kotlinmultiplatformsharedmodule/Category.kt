@@ -1,6 +1,7 @@
-package com.example.learningtolive
+package com.example.learningtolive.com.example.kotlinmultiplatformsharedmodule
 
 import java.io.Serializable
+import kotlin.jvm.JvmField
 
 class Category : Serializable {
     enum class Name {

@@ -1,4 +1,4 @@
-package com.example.learningtolive
+package com.example.kotlinmultiplatformsharedmodule
 
 class Country(var name: Name) {
     enum class Name {
