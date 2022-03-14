@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA8F153227DF5CD900D90781 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F152127DF5CD800D90781 /* ContentView.swift */; };
-		DA8F153327DF5CD900D90781 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F152127DF5CD800D90781 /* ContentView.swift */; };
 		DA8F153427DF5CD900D90781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8F152227DF5CD900D90781 /* Assets.xcassets */; };
 		DA8F153527DF5CD900D90781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8F152227DF5CD900D90781 /* Assets.xcassets */; };
 		DA8F154027DF6BF000D90781 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F153F27DF6BF000D90781 /* iosApp.swift */; };
 		DA8F154127DF6BF000D90781 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8F153F27DF6BF000D90781 /* iosApp.swift */; };
+		DAAFC60427DF8C350068CBD8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFC60327DF8C350068CBD8 /* MainView.swift */; };
+		DAAFC60527DF8C350068CBD8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFC60327DF8C350068CBD8 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DA8F152127DF5CD800D90781 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA8F152227DF5CD900D90781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA8F152727DF5CD900D90781 /* LearningToLiveIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningToLiveIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8F152D27DF5CD900D90781 /* LearningToLiveIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningToLiveIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8F152F27DF5CD900D90781 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		DA8F153F27DF6BF000D90781 /* iosApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
+		DAAFC60327DF8C350068CBD8 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +54,8 @@
 		DA8F151F27DF5CD800D90781 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				DAAFC60327DF8C350068CBD8 /* MainView.swift */,
 				DA8F153F27DF6BF000D90781 /* iosApp.swift */,
-				DA8F152127DF5CD800D90781 /* ContentView.swift */,
 				DA8F152227DF5CD900D90781 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -217,7 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8F153227DF5CD900D90781 /* ContentView.swift in Sources */,
+				DAAFC60427DF8C350068CBD8 /* MainView.swift in Sources */,
 				DA8F154027DF6BF000D90781 /* iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8F153327DF5CD900D90781 /* ContentView.swift in Sources */,
+				DAAFC60527DF8C350068CBD8 /* MainView.swift in Sources */,
 				DA8F154127DF6BF000D90781 /* iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +467,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.LearningToLiveIOS;
 				PRODUCT_NAME = LearningToLiveIOS;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -498,6 +499,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.LearningToLiveIOS;
 				PRODUCT_NAME = LearningToLiveIOS;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
