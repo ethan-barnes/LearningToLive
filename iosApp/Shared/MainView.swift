@@ -9,11 +9,20 @@ import SwiftUI
 import shared
 
 struct MainView: View {
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            MainView()
+        }
+    }
+    
+    @State private var willMoveToNextScreen = false
+    @State var myCountry = Country(name: Country.Name.unitedkingdom) // Placeholder country
     
     var body: some View {
         VStack {
             Button(action: {
-                selectCountry(country: Country(name: Country.Name.unitedkingdom))
+                myCountry = Country(name: Country.Name.unitedkingdom)
+                willMoveToNextScreen.toggle()
             }){
                 VStack {
                     Image("uk_flag")
@@ -22,42 +31,63 @@ struct MainView: View {
             }.padding()
 
             Button(action: {
-                selectCountry(country: Country(name: Country.Name.spain))
+                myCountry = Country(name: Country.Name.spain)
+                willMoveToNextScreen.toggle()
             }){
                 Image("spain_flag")
                 Text(String(describing: Country.Name.spain))
             }.padding()
-                        
+
             Button(action: {
-                selectCountry(country: Country(name: Country.Name.ireland))
+                myCountry = Country(name: Country.Name.ireland)
+                willMoveToNextScreen.toggle()
             }){
                 Image("ireland_flag")
                 Text(String(describing: Country.Name.ireland))
             }.padding()
-            
+
             Button(action: {
-                selectCountry(country: Country(name: Country.Name.slovenia))
+                myCountry = Country(name: Country.Name.slovenia)
+                willMoveToNextScreen.toggle()
             }){
                 Image("slovenia_flag")
                 Text(String(describing: Country.Name.slovenia))
             }.padding()
-            
+
             Button(action: {
-                selectCountry(country: Country(name: Country.Name.finland))
+                myCountry = Country(name: Country.Name.finland)
+                willMoveToNextScreen.toggle()
             }){
                 Image("finland_flag")
                 Text(String(describing: Country.Name.finland))
             }.padding()
         }
+        .navigate(to: CountryView(country: myCountry), when: $willMoveToNextScreen)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+extension View {
+    /// Navigate to a new view.
+    /// - Parameters:
+    ///   - view: View to navigate to.
+    ///   - binding: Only navigates when this condition is `true`.
+    func navigate<NewView: View>(to view: NewView, when binding: Binding<Bool>) -> some View {
+        NavigationView {
+            ZStack {
+                self
+                    //.navigationBarTitle("")
+                    //.navigationBarHidden(true)
 
-func selectCountry(country: Country) {
-    print("country is " + String(describing: country.name))
+                NavigationLink(
+                    destination: view,
+                        //.navigationBarTitle("")
+                        //.navigationBarHidden(true),
+                    isActive: binding
+                ) {
+                    EmptyView()
+                }
+            }
+        }
+        .navigationViewStyle(.stack)
+    }
 }
