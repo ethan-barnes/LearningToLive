@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.learningtolive.ExpandableListDataPump.populateLists
 import java.util.*
 import kotlin.collections.HashMap
+import com.example.shared.*
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category

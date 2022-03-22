@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.shared.Country
+import com.example.shared.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var ukButton: Button

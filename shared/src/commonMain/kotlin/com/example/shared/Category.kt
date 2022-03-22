@@ -1,4 +1,4 @@
-package com.example.learningtolive
+package com.example.shared
 
 import java.io.Serializable
 
