@@ -137,6 +137,7 @@ class CategoryActivity : AppCompatActivity() {
          */
         private fun createCategoriesLists(context: Context, category: Category?, country: String) {
             var headings = arrayOf<String>()
+            val fb = FirebaseHandler()
 
             // Clear HashMaps to prevent irrelevant links being left over from previously visited
             // pages.
@@ -148,6 +149,8 @@ class CategoryActivity : AppCompatActivity() {
                     references = context.resources.getStringArray(R.array.daily_life_references)
                 }
                 Category.Name.HEALTH -> {
+                    headings = fb.getHeadings(country, "health/headings", false)
+
                     headings = context.resources.getStringArray(R.array.health_headings)
                     references = context.resources.getStringArray(R.array.health_references)
                 }
