@@ -1,1 +1,23 @@
 com.example.kotlinmultiplatformsharedmodule
+array daily_life_headings
+array daily_life_references
+array health_headings
+array health_references
+array language_headings
+array language_references
+array migrant_headings
+array migrant_references
+array settling_headings
+array settling_references
+string app_name
+string contact_button
+string daily_life
+string finland
+string health_button
+string ireland
+string language_button
+string migrant_button
+string settling_button
+string slovenia
+string spain
+string united_kingdom
