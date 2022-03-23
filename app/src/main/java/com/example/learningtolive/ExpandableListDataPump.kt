@@ -13,8 +13,8 @@ object ExpandableListDataPump {
      * @param context static method needs context.
      */
     @JvmStatic
-    fun populateLists(categoryActivity: CategoryActivity, context: Context) {
-        getData(categoryActivity, context)
+    fun populateLists(categoryActivity: CategoryActivity, category: String, context: Context) {
+        getData(categoryActivity, category, context)
     }
 
     /***
@@ -23,14 +23,14 @@ object ExpandableListDataPump {
      * @param categoryActivity used to work around asynchronous issues.
      * @param context static method needs context.
      */
-    private fun getData(categoryActivity: CategoryActivity, context: Context) {
+    private fun getData(categoryActivity: CategoryActivity, category: String, context: Context) {
         val fb = FirebaseHandler()
         val refs = CategoryActivity.references
         val country = categoryActivity.intent.extras?.getString("country")
 
         try {
             for (ref in refs) {
-                var countryRef = "$country/$ref"
+                var countryRef = "$country/$category/$ref"
                 fb.getValue(countryRef, object : MyCallback {
                     override fun onCallBack(
                         title: String?,

@@ -1,52 +1,54 @@
 package com.example.learningtolive
 
+import android.content.Context
 import android.util.Log
+import com.example.learningtolive.ExpandableListDataPump.populateLists
 import com.example.shared.MyCallback
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.*
 import kotlin.collections.HashMap
 
 class FirebaseHandler {
     private val TAG = "FirebaseHandler"
-    private val firebaseUrl = "https://learningtolive-e4844-default-rtdb.europe-west1.firebasedatabase.app/"
+    private val firebaseUrl =
+        "https://learningtolive-e4844-default-rtdb.europe-west1.firebasedatabase.app/"
     private val db: FirebaseDatabase = FirebaseDatabase.getInstance(firebaseUrl)
 
-    fun getHeadings(country: String, category: String, idOrName: Boolean): Array<String> {
-        var path = "$country/$category"
-        var r = arrayOf<String>()
+    fun getCategories(
+        categoryActivity: CategoryActivity,
+        categoryCompanion: CategoryActivity.Companion,
+        context: Context,
+        country: String,
+        category: String
+    ) {
+        var path = "$country/$category/headings"
         val ref = db.getReference(path)
 
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = arrayListOf<String>()
+                val headings = arrayListOf<String>()
+                val references = arrayListOf<String>()
+
                 for (ds in dataSnapshot.children) {
                     if (ds.key != null) {
-                        if (idOrName) { // true = id
-                            data.add(ds.child("id").value.toString())
-                        } else { // false = name
-                            data.add(ds.child("name").value.toString())
-                        }
+                        references.add(ds.child("id").value.toString())
+                        headings.add(ds.child("name").value.toString())
                     }
                 }
-                data.toArray(r)
+
+                categoryCompanion.references = references.toTypedArray()
+                categoryCompanion.headings = headings.toTypedArray()
+
+                categoryCompanion.setCategories(country, category)
+                populateLists(categoryActivity, category, context)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.w(TAG, "Failed to read value.", databaseError.toException())
             }
         })
-
-        while (r.isEmpty()) {
-            // wait for firebase
-        }
-        return r
-    }
-
-    fun getReferences() {
-
     }
 
     /***

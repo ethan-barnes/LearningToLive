@@ -2,6 +2,7 @@ package com.example.learningtolive
 
 import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.net.ParseException
 import android.net.Uri
@@ -16,6 +17,7 @@ import com.example.learningtolive.ExpandableListDataPump.populateLists
 import java.util.*
 import kotlin.collections.HashMap
 import com.example.shared.*
+import java.util.concurrent.TimeUnit
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category
@@ -30,9 +32,9 @@ class CategoryActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
-        createCategoriesLists(this, category, country)
         expandableListView = findViewById<View>(R.id.expandableListView) as ExpandableListView
-        populateLists(this, applicationContext)
+        createCategoriesLists(this, this, category, country)
+        //populateLists(this, applicationContext)
     }
 
     companion object {
@@ -43,6 +45,7 @@ class CategoryActivity : AppCompatActivity() {
         private val activityExpandableListDetail = HashMap<String, List<String>>()
         private val activityUrls = HashMap<String, String>()
         private val categories = HashMap<String, String>()
+        var headings = arrayOf<String>()
         var references = arrayOf<String>()
 
         /***
@@ -131,12 +134,28 @@ class CategoryActivity : AppCompatActivity() {
         }
 
         /***
+         * Provides mapping between FireBase reference name and human-readable heading in app.
+         */
+        fun setCategories(country: String, category: String) {
+            if (headings.size == references.size) {
+                for (i in headings.indices) {
+                    val id = country + "/" + category + "/" + references[i]
+                    categories[id] = headings[i]
+                }
+            }
+        }
+
+        /***
          * Sets values that are used by FirebaseHandler to create links in expandable list.
          * @param context static method needs context to get class properties.
          * @param category is used to select correct links from firebase.
          */
-        private fun createCategoriesLists(context: Context, category: Category?, country: String) {
-            var headings = arrayOf<String>()
+        private fun createCategoriesLists(
+            categoryActivity: CategoryActivity,
+            context: Context,
+            category: Category?,
+            country: String
+        ) {
             val fb = FirebaseHandler()
 
             // Clear HashMaps to prevent irrelevant links being left over from previously visited
@@ -145,34 +164,27 @@ class CategoryActivity : AppCompatActivity() {
             activityUrls.clear()
             when (category!!.name) {
                 Category.Name.DAILYLIFE -> {
-                    headings = context.resources.getStringArray(R.array.daily_life_headings)
-                    references = context.resources.getStringArray(R.array.daily_life_references)
+                    fb.getCategories(categoryActivity, this, context, country, "life")
+                    //headings = context.resources.getStringArray(R.array.daily_life_headings)
+                    //references = context.resources.getStringArray(R.array.daily_life_references)
                 }
                 Category.Name.HEALTH -> {
-                    headings = fb.getHeadings(country, "health/headings", false)
-
-                    headings = context.resources.getStringArray(R.array.health_headings)
-                    references = context.resources.getStringArray(R.array.health_references)
+                    fb.getCategories(categoryActivity, this, context, country, "health")
                 }
                 Category.Name.SETTLINGIN -> {
-                    headings = context.resources.getStringArray(R.array.settling_headings)
-                    references = context.resources.getStringArray(R.array.settling_references)
+                    fb.getCategories(categoryActivity, this, context, country, "settling")
+                    //headings = context.resources.getStringArray(R.array.settling_headings)
+                    //references = context.resources.getStringArray(R.array.settling_references)
                 }
                 Category.Name.MIGRANTSTATUS -> {
-                    headings = context.resources.getStringArray(R.array.migrant_headings)
-                    references = context.resources.getStringArray(R.array.migrant_references)
+                    fb.getCategories(categoryActivity, this, context, country, "migrant")
+                    //headings = context.resources.getStringArray(R.array.migrant_headings)
+                    //references = context.resources.getStringArray(R.array.migrant_references)
                 }
                 Category.Name.LANGUAGE -> {
-                    headings = context.resources.getStringArray(R.array.language_headings)
-                    references = context.resources.getStringArray(R.array.language_references)
-                }
-            }
-
-            // Provides mapping between FireBase reference name and human-readable heading in app.
-            if (headings.size == references.size) {
-                for (i in headings.indices) {
-                    val id = country + "/" + references[i]
-                    categories[id] = headings[i]
+                    fb.getCategories(categoryActivity, this, context, country, "language")
+                    //headings = context.resources.getStringArray(R.array.language_headings)
+                    //references = context.resources.getStringArray(R.array.language_references)
                 }
             }
         }
