@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningToLive">
         <activity
-            android:name=".CategoryActivity"
+            android:name="com.example.kotlinmultiplatformsharedmodule.CategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".CountryActivity"
+            android:name="com.example.kotlinmultiplatformsharedmodule.CountryActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.kotlinmultiplatformsharedmodule.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -54,3 +54,7 @@ android {
         targetSdk = 31
     }
 }
+dependencies {
+    implementation("com.google.firebase:firebase-database-ktx:20.0.4")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+}
