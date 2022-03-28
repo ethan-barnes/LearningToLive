@@ -1,4 +1,4 @@
-package com.example.shared
+package com.example.learningtolive
 
 import java.io.Serializable
 
@@ -8,14 +8,8 @@ class Category : Serializable {
     }
 
     var name: Name
-    var subCategories: String? = null
 
     constructor(n: Name) {
         name = n
-    }
-
-    constructor(n: Name, sc: String?) {
-        name = n
-        subCategories = sc
     }
 }

@@ -15,6 +15,10 @@
 		DAAFC60527DF8C350068CBD8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFC60327DF8C350068CBD8 /* MainView.swift */; };
 		DAD2F77827E89C3D00E4C267 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2F77727E89C3D00E4C267 /* CountryView.swift */; };
 		DAD2F77927E89C3D00E4C267 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD2F77727E89C3D00E4C267 /* CountryView.swift */; };
+		DADB8CBE27F1B3F100F1DB37 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB8CBD27F1B3F100F1DB37 /* CategoryView.swift */; };
+		DADB8CBF27F1B3F100F1DB37 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB8CBD27F1B3F100F1DB37 /* CategoryView.swift */; };
+		DADB8CC127F1BE8100F1DB37 /* ExpandableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB8CC027F1BE8100F1DB37 /* ExpandableList.swift */; };
+		DADB8CC227F1BE8100F1DB37 /* ExpandableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB8CC027F1BE8100F1DB37 /* ExpandableList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,8 @@
 		DA8F153F27DF6BF000D90781 /* iosApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
 		DAAFC60327DF8C350068CBD8 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DAD2F77727E89C3D00E4C267 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
+		DADB8CBD27F1B3F100F1DB37 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		DADB8CC027F1BE8100F1DB37 /* ExpandableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,8 @@
 				DA8F153F27DF6BF000D90781 /* iosApp.swift */,
 				DA8F152227DF5CD900D90781 /* Assets.xcassets */,
 				DAD2F77727E89C3D00E4C267 /* CountryView.swift */,
+				DADB8CBD27F1B3F100F1DB37 /* CategoryView.swift */,
+				DADB8CC027F1BE8100F1DB37 /* ExpandableList.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -223,7 +231,9 @@
 			files = (
 				DAD2F77827E89C3D00E4C267 /* CountryView.swift in Sources */,
 				DAAFC60427DF8C350068CBD8 /* MainView.swift in Sources */,
+				DADB8CBE27F1B3F100F1DB37 /* CategoryView.swift in Sources */,
 				DA8F154027DF6BF000D90781 /* iosApp.swift in Sources */,
+				DADB8CC127F1BE8100F1DB37 /* ExpandableList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +243,9 @@
 			files = (
 				DAD2F77927E89C3D00E4C267 /* CountryView.swift in Sources */,
 				DAAFC60527DF8C350068CBD8 /* MainView.swift in Sources */,
+				DADB8CBF27F1B3F100F1DB37 /* CategoryView.swift in Sources */,
 				DA8F154127DF6BF000D90781 /* iosApp.swift in Sources */,
+				DADB8CC227F1BE8100F1DB37 /* ExpandableList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

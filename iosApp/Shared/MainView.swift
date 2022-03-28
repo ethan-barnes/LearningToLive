@@ -16,7 +16,7 @@ struct MainView: View {
     }
     
     @State private var willMoveToNextScreen = false
-    @State var myCountry = Country(name: Country.Name.unitedkingdom) // Placeholder country
+    @State var myCountry = Country(name: Country.Name.unitedkingdom)
     
     var body: some View {
         VStack {

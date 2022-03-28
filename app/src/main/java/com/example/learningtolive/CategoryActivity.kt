@@ -2,7 +2,6 @@ package com.example.learningtolive
 
 import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.net.ParseException
 import android.net.Uri
@@ -13,11 +12,8 @@ import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.learningtolive.ExpandableListDataPump.populateLists
 import java.util.*
 import kotlin.collections.HashMap
-import com.example.shared.*
-import java.util.concurrent.TimeUnit
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category

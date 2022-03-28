@@ -1,25 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml:2:1-67
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml:2:1-67
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml:2:1-67
+ADDED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml:2:1-67
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml:2:1-67
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml:2:1-67
 	package
-		ADDED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml:2:11-64
-		INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-		INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
+		ADDED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml:2:11-64
+		INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml:2:1-67
+		ADDED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml:2:1-67
 uses-sdk
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-		ADDED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-		INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-		ADDED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
-		INJECTED from D:\Documents\SchoolAndCareer\Uni\MobileApp\LearningToLive\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/ecbarnes/AndroidStudioProjects/LearningToLive/shared/src/androidMain/AndroidManifest.xml
