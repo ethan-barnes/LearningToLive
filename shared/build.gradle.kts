@@ -1,7 +1,9 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization") version "1.5.30"
     id("com.android.library")
 }
+val firebaseDatabaseKtxVersion by extra("20.0.4")
 
 kotlin {
     android()
@@ -17,7 +19,11 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("dev.gitlive:firebase-database:1.4.3")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -55,6 +61,9 @@ android {
     }
 }
 dependencies {
-    implementation("com.google.firebase:firebase-database-ktx:20.0.4")
     implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("dev.gitlive:firebase-database:1.4.3")
+    implementation("com.google.firebase:firebase-iid:21.1.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }

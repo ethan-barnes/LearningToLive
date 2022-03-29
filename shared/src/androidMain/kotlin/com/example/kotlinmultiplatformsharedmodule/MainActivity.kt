@@ -6,6 +6,13 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shared.*
+import kotlinx.coroutines.Dispatchers.Unconfined
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var ukButton: Button
@@ -39,6 +46,11 @@ class MainActivity : AppCompatActivity() {
         }
         finlandButton = findViewById<View>(R.id.finland_button) as Button
         finlandButton.setOnClickListener { v ->
+            var x : FirebaseShared = FirebaseShared()
+            GlobalScope.launch(Unconfined) {
+                x.test()
+            }
+
             val c = Country(Country.Name.FINLAND)
             selectCountry(v, c)
         }
