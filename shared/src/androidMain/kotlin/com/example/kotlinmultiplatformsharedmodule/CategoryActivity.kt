@@ -12,8 +12,11 @@ import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.shared.FirebaseShared
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.coroutines.CoroutineContext
 
 class CategoryActivity : AppCompatActivity() {
     private lateinit var category: Category
@@ -43,6 +46,15 @@ class CategoryActivity : AppCompatActivity() {
         private val categories = HashMap<String, String>()
         var headings = arrayOf<String>()
         var references = arrayOf<String>()
+        var fbShared = FirebaseShared()
+
+        private fun setHeadings(headings: ArrayList<String>) {
+            this.headings = headings.toTypedArray()
+        }
+
+        private fun setReferences(references: ArrayList<String>) {
+            this.references = references.toTypedArray()
+        }
 
         /***
          * Creates expandable list and handles opening of URLs. Called for each heading in FireBase.
@@ -152,35 +164,56 @@ class CategoryActivity : AppCompatActivity() {
             category: Category?,
             country: String
         ) {
-            val fb = FirebaseHandler()
-
-            // Clear HashMaps to prevent irrelevant links being left over from previously visited
-            // pages.
+            /* Clear HashMaps to prevent irrelevant links being left over from previously visited
+                pages. */
             activityExpandableListDetail.clear()
             activityUrls.clear()
+
             when (category!!.name) {
                 Category.Name.DAILYLIFE -> {
-                    fb.getCategories(categoryActivity, this, context, country, "life")
-                    //headings = context.resources.getStringArray(R.array.daily_life_headings)
-                    //references = context.resources.getStringArray(R.array.daily_life_references)
+                    setCategoriesFirebase(country, "life", categoryActivity, context)
                 }
                 Category.Name.HEALTH -> {
-                    fb.getCategories(categoryActivity, this, context, country, "health")
+                    setCategoriesFirebase(country, "health", categoryActivity, context)
                 }
                 Category.Name.SETTLINGIN -> {
-                    fb.getCategories(categoryActivity, this, context, country, "settling")
-                    //headings = context.resources.getStringArray(R.array.settling_headings)
-                    //references = context.resources.getStringArray(R.array.settling_references)
+                    setCategoriesFirebase(country, "settling", categoryActivity, context)
                 }
                 Category.Name.MIGRANTSTATUS -> {
-                    fb.getCategories(categoryActivity, this, context, country, "migrant")
-                    //headings = context.resources.getStringArray(R.array.migrant_headings)
-                    //references = context.resources.getStringArray(R.array.migrant_references)
+                    setCategoriesFirebase(country, "migrant", categoryActivity, context)
                 }
                 Category.Name.LANGUAGE -> {
-                    fb.getCategories(categoryActivity, this, context, country, "language")
-                    //headings = context.resources.getStringArray(R.array.language_headings)
-                    //references = context.resources.getStringArray(R.array.language_references)
+                    setCategoriesFirebase(country, "language", categoryActivity, context)
+                }
+            }
+        }
+
+        private fun setCategoriesFirebase(
+            country: String,
+            category: String,
+            categoryActivity: CategoryActivity,
+            context: Context
+        ) {
+            val coroutineContext: CoroutineContext = Dispatchers.Main
+            val scope = CoroutineScope(coroutineContext + SupervisorJob())
+
+            var flow = fbShared.getCategoriesAndroid(country, category)
+            scope.launch {
+                flow.collect { response ->
+                    val headings = arrayListOf<String>()
+                    val references = arrayListOf<String>()
+                    for (ds in response.children) {
+                        if (ds.key != null) {
+                            var heading = ds.children.iterator()
+                            references.add(heading.next().value()) // id
+                            headings.add(heading.next().value()) // name
+                        }
+                    }
+                    setHeadings(headings)
+                    setReferences(references)
+
+                    setCategories(country, category)
+                    ExpandableListDataPump.populateLists(categoryActivity, category, context)
                 }
             }
         }
