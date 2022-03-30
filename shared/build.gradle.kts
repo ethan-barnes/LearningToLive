@@ -22,6 +22,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("dev.gitlive:firebase-database:1.4.3")
+                implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+                implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
             }
         }
         val commonTest by getting {

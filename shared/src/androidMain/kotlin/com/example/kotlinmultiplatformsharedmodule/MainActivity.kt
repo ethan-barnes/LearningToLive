@@ -9,9 +9,6 @@ import com.example.shared.*
 import kotlinx.coroutines.Dispatchers.Unconfined
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.Continuation
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         finlandButton.setOnClickListener { v ->
             var x : FirebaseShared = FirebaseShared()
             GlobalScope.launch(Unconfined) {
-                x.test()
+                x.getHeadings("united_kingdom", "health")
             }
 
             val c = Country(Country.Name.FINLAND)
