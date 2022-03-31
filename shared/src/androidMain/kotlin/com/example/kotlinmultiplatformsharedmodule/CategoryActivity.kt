@@ -44,9 +44,9 @@ class CategoryActivity : AppCompatActivity() {
         private val activityExpandableListDetail = HashMap<String, List<String>>()
         private val activityUrls = HashMap<String, String>()
         private val categories = HashMap<String, String>()
+        private var fbShared = FirebaseShared()
         var headings = arrayOf<String>()
         var references = arrayOf<String>()
-        var fbShared = FirebaseShared()
 
         private fun setHeadings(headings: ArrayList<String>) {
             this.headings = headings.toTypedArray()
@@ -142,18 +142,6 @@ class CategoryActivity : AppCompatActivity() {
         }
 
         /***
-         * Provides mapping between FireBase reference name and human-readable heading in app.
-         */
-        fun setCategories(country: String, category: String) {
-            if (headings.size == references.size) {
-                for (i in headings.indices) {
-                    val id = country + "/" + category + "/" + references[i]
-                    categories[id] = headings[i]
-                }
-            }
-        }
-
-        /***
          * Sets values that are used by FirebaseHandler to create links in expandable list.
          * @param context static method needs context to get class properties.
          * @param category is used to select correct links from firebase.
@@ -197,7 +185,7 @@ class CategoryActivity : AppCompatActivity() {
             val coroutineContext: CoroutineContext = Dispatchers.Main
             val scope = CoroutineScope(coroutineContext + SupervisorJob())
 
-            var flow = fbShared.getCategoriesAndroid(country, category)
+            var flow = fbShared.getDataFlow(country, category, "headings")
             scope.launch {
                 flow.collect { response ->
                     val headings = arrayListOf<String>()
@@ -214,6 +202,18 @@ class CategoryActivity : AppCompatActivity() {
 
                     setCategories(country, category)
                     ExpandableListDataPump.populateLists(categoryActivity, category, context)
+                }
+            }
+        }
+
+        /***
+         * Provides mapping between FireBase reference name and human-readable heading in app.
+         */
+        private fun setCategories(country: String, category: String) {
+            if (headings.size == references.size) {
+                for (i in headings.indices) {
+                    val id = country + "/" + category + "/" + references[i]
+                    categories[id] = headings[i]
                 }
             }
         }

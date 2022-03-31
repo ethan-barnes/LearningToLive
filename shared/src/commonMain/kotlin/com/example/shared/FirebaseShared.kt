@@ -13,10 +13,10 @@ class FirebaseShared {
     "https://learningtolive-e4844-default-rtdb.europe-west1.firebasedatabase.app/"
     private val db: FirebaseDatabase = Firebase.database(firebaseUrl)
 
-     fun getCategoriesAndroid(country: String, category: String): Flow<DataSnapshot> {
-         var path = "$country/$category/headings"
-         val myRef = db.reference(path)
-         return myRef.valueEvents
+    fun getDataFlow(country: String, category: String, ref: String): Flow<DataSnapshot> {
+        var path = "$country/$category/$ref"
+        val request = db.reference(path)
+        return request.valueEvents
     }
 
 }

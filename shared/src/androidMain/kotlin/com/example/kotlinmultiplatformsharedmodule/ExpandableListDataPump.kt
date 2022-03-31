@@ -3,9 +3,17 @@ package com.example.kotlinmultiplatformsharedmodule
 import android.content.Context
 import android.util.Log
 import com.example.shared.*
+import com.google.firebase.database.DataSnapshot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.flow.Flow
 
 object ExpandableListDataPump {
     private const val TAG = "ExpandableListDataPump"
+    private var fbShared = FirebaseShared()
 
     /***
      * This a more logical function name than getData()
@@ -24,23 +32,31 @@ object ExpandableListDataPump {
      * @param context static method needs context.
      */
     private fun getData(categoryActivity: CategoryActivity, category: String, context: Context) {
-        val fb = FirebaseHandler()
         val refs = CategoryActivity.references
         val country = categoryActivity.intent.extras?.getString("country")
+        val coroutineContext: CoroutineContext = Dispatchers.Main
+        val scope = CoroutineScope(coroutineContext + SupervisorJob())
 
         try {
             for (ref in refs) {
-                var countryRef = "$country/$category/$ref"
-                fb.getValue(countryRef, object : MyCallback {
-                    override fun onCallBack(
-                        title: String?,
-                        value: java.util.HashMap<String?, String?>?
-                    ) {
-                        if (value!!.isNotEmpty()) {
-                            createLists(title!!, value, categoryActivity, context)
+                if (country != null) {
+                    var flow = fbShared.getDataFlow(country, category, ref)
+
+                    scope.launch {
+                        flow.collect { response ->
+                            val data = HashMap<String?, String?>()
+                            for (ds in response.children) {
+                                if (ds.key != null) {
+                                    data[ds.key] = ds.value()
+                                }
+                            }
+                            if (data.isNotEmpty()) {
+                                var path = "$country/$category/$ref"
+                                createLists(path, data, categoryActivity, context)
+                            }
                         }
                     }
-                })
+                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "Could not get from FireBase. $e")
