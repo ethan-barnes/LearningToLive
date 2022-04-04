@@ -11,15 +11,27 @@ import shared
 struct CategoryView: View {
     var category: shared.CategoryShared
     var body: some View {
-        List(sampleMenuItems, children: \.subMenuItems) { item in
-            HStack {
-                Text(item.name)
-                    .font(.system(.title3, design: .rounded))
-                    .bold()
+        VStack {
+            List(sampleMenuItems, children: \.subMenuItems) { item in
+                HStack {
+                    Text(item.name)
+                        .font(.system(.title3, design: .rounded))
+                        .bold()
+                }
             }
-        }.listStyle(.plain)
+            .listStyle(.plain)
+            
+//            Button(action: {
+//                getFbData(country: "united_kingdom", category: "health", ref: "headings")
+//            }){
+//                Text("Health and Well-Being")
+//            }.padding()
+        }
+        
     }
 }
+
+
 
 //struct CategoryView_Previews: PreviewProvider {
 //    static var previews: some View {

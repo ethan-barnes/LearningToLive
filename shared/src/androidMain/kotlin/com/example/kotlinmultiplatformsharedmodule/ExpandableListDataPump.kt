@@ -2,18 +2,15 @@ package com.example.kotlinmultiplatformsharedmodule
 
 import android.content.Context
 import android.util.Log
-import com.example.shared.*
-import com.google.firebase.database.DataSnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import kotlinx.coroutines.flow.Flow
 
 object ExpandableListDataPump {
     private const val TAG = "ExpandableListDataPump"
-    private var fbShared = FirebaseShared()
+    private var fbShared = Firebase()
 
     /***
      * This a more logical function name than getData()

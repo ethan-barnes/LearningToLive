@@ -19,19 +19,19 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        val commonMain by getting
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
+        val androidMain by getting {
             dependencies {
                 implementation("dev.gitlive:firebase-database:1.4.3")
                 implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
                 implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-        val androidMain by getting
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

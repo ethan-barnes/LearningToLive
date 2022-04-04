@@ -16,12 +16,13 @@ struct MainView: View {
     }
     
     @State private var willMoveToNextScreen = false
-    @State var myCountry = Country(name: Country.Name.unitedkingdom)
+    @State var myCountry = ""
     
     var body: some View {
         VStack {
             Button(action: {
-                myCountry = Country(name: Country.Name.unitedkingdom)
+                //myCountry = Country(name: Country.Name.unitedkingdom)
+                myCountry = "united_kingdom"
                 willMoveToNextScreen.toggle()
             }){
                 VStack {
@@ -31,7 +32,8 @@ struct MainView: View {
             }.padding()
 
             Button(action: {
-                myCountry = Country(name: Country.Name.spain)
+                // myCountry = Country(name: Country.Name.spain)
+                myCountry = "spain"
                 willMoveToNextScreen.toggle()
             }){
                 Image("spain_flag")
@@ -39,7 +41,8 @@ struct MainView: View {
             }.padding()
 
             Button(action: {
-                myCountry = Country(name: Country.Name.ireland)
+                //myCountry = Country(name: Country.Name.ireland)
+                myCountry = "ireland"
                 willMoveToNextScreen.toggle()
             }){
                 Image("ireland_flag")
@@ -47,7 +50,8 @@ struct MainView: View {
             }.padding()
 
             Button(action: {
-                myCountry = Country(name: Country.Name.slovenia)
+                //myCountry = Country(name: Country.Name.slovenia)
+                myCountry = "slovenia"
                 willMoveToNextScreen.toggle()
             }){
                 Image("slovenia_flag")
@@ -55,7 +59,8 @@ struct MainView: View {
             }.padding()
 
             Button(action: {
-                myCountry = Country(name: Country.Name.finland)
+                //myCountry = Country(name: Country.Name.finland)
+                myCountry = "finland"
                 willMoveToNextScreen.toggle()
             }){
                 Image("finland_flag")

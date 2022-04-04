@@ -12,7 +12,6 @@ import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.shared.FirebaseShared
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.HashMap
@@ -44,7 +43,7 @@ class CategoryActivity : AppCompatActivity() {
         private val activityExpandableListDetail = HashMap<String, List<String>>()
         private val activityUrls = HashMap<String, String>()
         private val categories = HashMap<String, String>()
-        private var fbShared = FirebaseShared()
+        private var fbShared = Firebase()
         var headings = arrayOf<String>()
         var references = arrayOf<String>()
 
