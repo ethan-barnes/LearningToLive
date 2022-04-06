@@ -13,46 +13,40 @@ struct CountryView: View {
     var country: String
     
     @State private var willMoveToNextScreen = false
-    @State var myCategory = shared.CategoryShared(n: shared.CategoryShared.Name.dailylife)
+    @State private var myCategory = ""
     
     var body: some View {
         VStack {
-            //Text(String(describing: country.name))
             Button(action: {
-                myCategory = shared.CategoryShared(n: shared.CategoryShared.Name.dailylife)
-                setCategoriesFirebase(country: country, category: "life", ref: "headings")
+                myCategory = "life"
                 willMoveToNextScreen.toggle()
             }){
                 Text("Daily Life")
             }.padding()
             
             Button(action: {
-                myCategory = shared.CategoryShared(n: shared.CategoryShared.Name.health)
-                setCategoriesFirebase(country: country, category: "health", ref: "headings")
+                myCategory = "health"
                 willMoveToNextScreen.toggle()
             }){
                 Text("Health and Well-Being")
             }.padding()
             
             Button(action: {
-                myCategory = shared.CategoryShared(n: shared.CategoryShared.Name.settlingin)
-                setCategoriesFirebase(country: country, category: "settling", ref: "headings")
+                myCategory = "settling"
                 willMoveToNextScreen.toggle()
             }){
                 Text("Settling In")
             }.padding()
             
             Button(action: {
-                myCategory = shared.CategoryShared(n: shared.CategoryShared.Name.migrantstatus)
-                setCategoriesFirebase(country: country, category: "migrant", ref: "headings")
+                myCategory = "migrant"
                 willMoveToNextScreen.toggle()
             }){
                 Text("Migrant Status")
             }.padding()
             
             Button(action: {
-                myCategory = shared.CategoryShared(n: shared.CategoryShared.Name.language)
-                setCategoriesFirebase(country: country, category: "language", ref: "headings")
+                myCategory = "language"
                 willMoveToNextScreen.toggle()
             }){
                 Text("Language and Study")
@@ -64,7 +58,7 @@ struct CountryView: View {
                 Text("Contact Us")
             }.padding()
         }
-        .navigate(to: CategoryView(category: myCategory), when: $willMoveToNextScreen)
+        .navigate(to: CategoryView(category: myCategory, country: country), when: $willMoveToNextScreen)
     }
 }
 
@@ -84,31 +78,6 @@ extension View {
         }
         .navigationViewStyle(.stack)
     }
-    
-    func setCategoriesFirebase(country: String, category: String, ref: String) {
-        let path = country + "/" + category.lowercased() + "/" + ref
-        print("Path: " + path)
-        var fbRef: DatabaseReference!
-        fbRef = Database.database().reference(withPath: path)
-        fbRef.observe(DataEventType.value, with: { snapshot in
-            // print(snapshot.value as Any)
-            var headings: [String] = []
-            var references: [String] = []
-            for child in snapshot.children {
-                let snap = child as! DataSnapshot
-                let val = snap.value as! [String: String?]
-
-                let id = val["id"]!!
-                let name = val["name"]!!
-                //print("ID: \(id) , NAME: \(name)")
-                headings.append(name)
-                references.append(id)
-                
-            }
-            print(references)
-        })
-    }
-    
 }
 
 
