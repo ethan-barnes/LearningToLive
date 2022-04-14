@@ -10,6 +10,7 @@ import shared
 import FirebaseDatabase
 
 struct CountryView: View {
+    @Environment(\.openURL) var openURL
     var country: String
     
     @State private var willMoveToNextScreen = false
@@ -17,68 +18,48 @@ struct CountryView: View {
     
     var body: some View {
         VStack {
-            Button(action: {
-                myCategory = "life"
-                willMoveToNextScreen.toggle()
-            }){
-                Text("Daily Life")
+            NavigationLink(destination: CategoryView(category: "life", country: country)) {
+                Label("Daily Life", systemImage: "")
+            }.padding()
+            NavigationLink(destination: CategoryView(category: "health", country: country)) {
+                Label("Health and Well-Being", systemImage: "")
+            }.padding()
+            NavigationLink(destination: CategoryView(category: "settling", country: country)) {
+                Label("Settling In", systemImage: "")
+            }.padding()
+            NavigationLink(destination: CategoryView(category: "migrant", country: country)) {
+                Label("Migrant Status", systemImage: "")
+            }.padding()
+            NavigationLink(destination: CategoryView(category: "language", country: country)) {
+                Label("Language and Study", systemImage: "")
             }.padding()
             
             Button(action: {
-                myCategory = "health"
-                willMoveToNextScreen.toggle()
+                openURL(URL(string: "https://forms.office.com/Pages/ResponsePage.aspx?id=0aJeJGVDJkeAWmMeuT2Tqu8X0dAa6ktFvDvIrgRWdjFUREoxNlNaQ0JCT0dJQVg1MVcxWVJMT1Q1My4u")!)
             }){
-                Text("Health and Well-Being")
-            }.padding()
-            
-            Button(action: {
-                myCategory = "settling"
-                willMoveToNextScreen.toggle()
-            }){
-                Text("Settling In")
-            }.padding()
-            
-            Button(action: {
-                myCategory = "migrant"
-                willMoveToNextScreen.toggle()
-            }){
-                Text("Migrant Status")
-            }.padding()
-            
-            Button(action: {
-                myCategory = "language"
-                willMoveToNextScreen.toggle()
-            }){
-                Text("Language and Study")
-            }.padding()
-            
-            Button(action: {
-                willMoveToNextScreen.toggle()
-            }){
-                Text("Contact Us")
+                Text("Rate this app")
             }.padding()
         }
-        .navigate(to: CategoryView(category: myCategory, country: country), when: $willMoveToNextScreen)
     }
 }
 
-extension View {
-    /// Navigate to a new view.
-    /// - Parameters:
-    ///   - view: View to navigate to.
-    ///   - binding: Only navigates when this condition is `true`.
-    func navigate<NewView: View>(to view: CategoryView, when binding: Binding<Bool>) -> some View {
-        NavigationView {
-            ZStack {
-                self
-                NavigationLink(destination: view, isActive: binding) {
-                    EmptyView()
-                }
-            }
-        }
-        .navigationViewStyle(.stack)
-    }
-}
+//extension View {
+//    /// Navigate to a new view.
+//    /// - Parameters:
+//    ///   - view: View to navigate to.
+//    ///   - binding: Only navigates when this condition is `true`.
+//    func navigate<NewView: View>(to view: CategoryView, when binding: Binding<Bool>) -> some View {
+//        NavigationView {
+//            ZStack {
+//                self
+//                NavigationLink(destination: view, isActive: binding) {
+//                    EmptyView()
+//                }
+//            }
+//        }
+//        .navigationViewStyle(.stack)
+//    }
+//}
 
 
 //struct CountryView_Previews: PreviewProvider {

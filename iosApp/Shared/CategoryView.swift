@@ -14,7 +14,7 @@ struct CategoryView: View {
     var category: String
     var country: String
     
-    @State private var myHeadings: [MenuItem] = [MenuItem(name: "Testing")]
+    @State private var myHeadings: [MenuItem] = [MenuItem(name: "No Content Found")]
     @State private var links = [String : String]()
     
     var body: some View {
@@ -25,8 +25,10 @@ struct CategoryView: View {
                 HStack {
                     Button(action: {
                         if(item.subMenuItems == nil) { // If we're clicking on a submenuitem
-                            let url = links[item.name]!
-                            openURL(URL(string: url)!)
+                            if (links[item.name] != nil) {                                
+                                let url = links[item.name]!
+                                openURL(URL(string: url)!)
+                            }
                         }
                     }){
                         Text(item.name)
