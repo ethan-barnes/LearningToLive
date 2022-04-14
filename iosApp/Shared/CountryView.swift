@@ -42,28 +42,3 @@ struct CountryView: View {
         }
     }
 }
-
-//extension View {
-//    /// Navigate to a new view.
-//    /// - Parameters:
-//    ///   - view: View to navigate to.
-//    ///   - binding: Only navigates when this condition is `true`.
-//    func navigate<NewView: View>(to view: CategoryView, when binding: Binding<Bool>) -> some View {
-//        NavigationView {
-//            ZStack {
-//                self
-//                NavigationLink(destination: view, isActive: binding) {
-//                    EmptyView()
-//                }
-//            }
-//        }
-//        .navigationViewStyle(.stack)
-//    }
-//}
-
-
-//struct CountryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CountryView(country: mainCountry)
-//    }
-//}
