@@ -4,7 +4,6 @@
 //
 //  Created by Ethan Barnes on 14/03/2022.
 //
-//  https://kotlinlang.org/docs/multiplatform-mobile-integrate-in-existing-app.html#use-the-shared-module-from-swift
 import SwiftUI
 import shared
 
@@ -15,7 +14,7 @@ struct MainView: View {
         }
     }
     
-    @State private var willMoveToNextScreen = false
+//     @State private var willMoveToNextScreen = false
     @State var myCountry = ""
     
     var body: some View {

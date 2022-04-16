@@ -1,10 +1,14 @@
 package com.example.kotlinmultiplatformsharedmodule
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class CountryActivity : AppCompatActivity() {
@@ -14,6 +18,7 @@ class CountryActivity : AppCompatActivity() {
     private lateinit var settlingButton: Button
     private lateinit var migrantButton: Button
     private lateinit var languageButton: Button
+    private lateinit var rateButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val extras = intent.extras
@@ -22,9 +27,6 @@ class CountryActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country)
-
-        val countryNameTV = findViewById<View>(R.id.countryNameTV) as TextView
-        countryNameTV.text = country
 
         dailyLifeButton = findViewById<View>(R.id.daily_life_button) as Button
         dailyLifeButton.setOnClickListener {
@@ -50,6 +52,19 @@ class CountryActivity : AppCompatActivity() {
         languageButton.setOnClickListener {
             val c = Category(Category.Name.LANGUAGE)
             sendCategory(c, country)
+        }
+        rateButton = findViewById<View>(R.id.contact_button) as Button
+        rateButton.setOnClickListener {
+            try {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rate_url)))
+                this.startActivity(browserIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(
+                    this,
+                    "Cannot open link, missing browser on device.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 

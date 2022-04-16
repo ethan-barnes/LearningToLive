@@ -11,7 +11,6 @@ array migrant_references
 array settling_headings
 array settling_references
 id contact_button
-id countryNameTV
 id daily_life_button
 id expandableListView
 id expandedListItem
@@ -41,6 +40,7 @@ string health_button
 string ireland
 string language_button
 string migrant_button
+string rate_url
 string settling_button
 string slovenia
 string spain

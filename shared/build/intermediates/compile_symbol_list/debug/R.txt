@@ -753,7 +753,6 @@ int id chronometer 0x0
 int id contact_button 0x0
 int id content 0x0
 int id contentPanel 0x0
-int id countryNameTV 0x0
 int id custom 0x0
 int id customPanel 0x0
 int id daily_life_button 0x0
@@ -987,6 +986,7 @@ int string health_button 0x0
 int string ireland 0x0
 int string language_button 0x0
 int string migrant_button 0x0
+int string rate_url 0x0
 int string search_menu_title 0x0
 int string settling_button 0x0
 int string slovenia 0x0

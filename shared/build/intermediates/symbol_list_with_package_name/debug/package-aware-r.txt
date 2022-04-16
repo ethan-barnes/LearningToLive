@@ -754,7 +754,6 @@ id chronometer
 id contact_button
 id content
 id contentPanel
-id countryNameTV
 id custom
 id customPanel
 id daily_life_button
@@ -988,6 +987,7 @@ string health_button
 string ireland
 string language_button
 string migrant_button
+string rate_url
 string search_menu_title
 string settling_button
 string slovenia

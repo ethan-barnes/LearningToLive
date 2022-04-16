@@ -32,7 +32,6 @@ class CategoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_category)
         expandableListView = findViewById<View>(R.id.expandableListView) as ExpandableListView
         createCategoriesLists(this, this, category, country)
-        //populateLists(this, applicationContext)
     }
 
     companion object {
