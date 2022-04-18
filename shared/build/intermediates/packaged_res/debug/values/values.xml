@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="daily_life_headings">
+        <item name="life_housing">Housing and Accommodation</item>
+        <item name="life_food">Food and Home</item>
+        <item name="life_eating">Eating Out</item>
+        <item name="life_money">Money and Banking</item>
+        <item name="life_family">Family Support and Childcare</item>
+        <item name="life_travel">Travel to Campus</item>
+        <item name="life_hospitals">Hospitals and Pharmacies</item>
+        <item name="life_local">Local Area</item>
+    </string-array>
+    <string-array name="daily_life_references">
+        <item name="life_housing">life/life_housing</item>
+        <item name="life_food">life/life_food</item>
+        <item name="life_eating">life/life_eating</item>
+        <item name="life_money">life/life_money</item>
+        <item name="life_family">life/life_family</item>
+        <item name="life_travel">life/life_travel</item>
+        <item name="life_hospitals">life/life_hospitals</item>
+        <item name="life_local">life/life_local</item>
+    </string-array>
+    <string-array name="health_headings">
+        <item name="health_online_psychological">Online Psychological Support</item>
+        <item name="health_dental">Health and Dental</item>
+        <item name="health_counselling">Counselling and Befriending</item>
+        <item name="health_worship">Worship and Prayer</item>
+        <item name="health_psychological">Psychological Support Services</item>
+        <item name="health_sleep">Sleep and Relaxation Advice</item>
+        <item name="health_accommodation">Living in Shared Accommodation</item>
+    </string-array>
+    <string-array name="health_references">
+        <item name="health_online_psychological">health/health_online_psychological</item>
+        <item name="health_dental">health/health_dental</item>
+        <item name="health_counselling">health/health_counselling</item>
+        <item name="health_worship">health/health_worship</item>
+        <item name="health_psychological">health/health_psychological</item>
+        <item name="health_sleep">health/health_sleep</item>
+        <item name="health_accommodation">health/health_accommodation</item>
+    </string-array>
+    <string-array name="language_headings">
+        <item name="language_tools">Language Tools</item>
+    </string-array>
+    <string-array name="language_references">
+        <item name="language_tools">language/language_tools</item>
+    </string-array>
+    <string-array name="migrant_headings">
+        <item name="migrant_visa">Visa, Legal Advice and Embassies</item>
+    </string-array>
+    <string-array name="migrant_references">
+        <item name="migrant_visa">migrant/migrant_visa</item>
+    </string-array>
+    <string-array name="settling_headings">
+        <item name="settling_friend_finder">Friend Finder</item>
+    </string-array>
+    <string-array name="settling_references">
+        <item name="settling_friend_finder">settling/settling_friend_finder</item>
+    </string-array>
+    <string name="app_name">LearningToLive</string>
+    <string name="contact_button">Rate this app</string>
+    <string name="daily_life">Daily Life</string>
+    <string name="finland">finland</string>
+    <string name="health_button">Health and Well-Being</string>
+    <string name="ireland">ireland</string>
+    <string name="language_button">Language and Study</string>
+    <string name="migrant_button">Migrant Status</string>
+    <string name="rate_url">https://forms.office.com/Pages/ResponsePage.aspx?id=0aJeJGVDJkeAWmMeuT2Tqu8X0dAa6ktFvDvIrgRWdjFUREoxNlNaQ0JCT0dJQVg1MVcxWVJMT1Q1My4u</string>
+    <string name="settling_button">Settling In</string>
+    <string name="slovenia">slovenia</string>
+    <string name="spain">spain</string>
+    <string name="united_kingdom">united_kingdom</string>
+</resources>

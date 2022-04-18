@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">LearningToLive</string>
+    <string name="united_kingdom">united_kingdom</string>
+    <string name="spain">spain</string>
+    <string name="ireland">ireland</string>
+    <string name="slovenia">slovenia</string>
+    <string name="finland">finland</string>
+    <string name="daily_life">Daily Life</string>
+    <string name="health_button">Health and Well-Being</string>
+    <string name="settling_button">Settling In</string>
+    <string name="migrant_button">Migrant Status</string>
+    <string name="language_button">Language and Study</string>
+    <string name="contact_button">Rate this app</string>
+    <string name="rate_url">https://forms.office.com/Pages/ResponsePage.aspx?id=0aJeJGVDJkeAWmMeuT2Tqu8X0dAa6ktFvDvIrgRWdjFUREoxNlNaQ0JCT0dJQVg1MVcxWVJMT1Q1My4u</string>
+</resources>
