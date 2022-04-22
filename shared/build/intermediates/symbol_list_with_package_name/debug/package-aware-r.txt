@@ -993,6 +993,7 @@ string settling_button
 string slovenia
 string spain
 string status_bar_notification_info_overflow
+string uk
 string united_kingdom
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

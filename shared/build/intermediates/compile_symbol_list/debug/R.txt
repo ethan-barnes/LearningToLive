@@ -992,6 +992,7 @@ int string settling_button 0x0
 int string slovenia 0x0
 int string spain 0x0
 int string status_bar_notification_info_overflow 0x0
+int string uk 0x0
 int string united_kingdom 0x0
 int style AlertDialog_AppCompat 0x0
 int style AlertDialog_AppCompat_Light 0x0
