@@ -44,4 +44,5 @@ string rate_url
 string settling_button
 string slovenia
 string spain
+string uk
 string united_kingdom

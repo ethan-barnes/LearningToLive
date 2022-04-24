@@ -31,7 +31,7 @@ struct CountryView: View {
                 Label("Migrant Status", systemImage: "")
             }.padding()
             NavigationLink(destination: CategoryView(category: "language", country: country)) {
-                Label("Language and Study", systemImage: "")
+                Label("LanguAage and Study", systemImage: "")
             }.padding()
             
             Button(action: {

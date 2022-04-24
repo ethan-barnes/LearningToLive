@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">LearningToLive</string>
+    <string name="uk">united kingdom</string>
     <string name="united_kingdom">united_kingdom</string>
     <string name="spain">spain</string>
     <string name="ireland">ireland</string>
